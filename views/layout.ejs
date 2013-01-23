@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en"> 
+	<head>
+		<title><%= title %></title>
+		<link rel="stylesheet" href="/css/style.css" type="text/css">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="/js/index.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<div id="headercentre">
+				<div style="left: 0px;">
+					<a href="/"><div class="nav" id="home">home</div></a>
+					<a href="/hackers"><div class="nav" id="hackers">hackers</div></a>
+					<a href="/hacks"><div class="nav" id="hacks">hacks</div></a>
+					<a href="/submit"><div class="nav" id="submit">submit</div></a>
+				</div>
+				<div style="right: 0px; float:right;">
+					<% if (user) { %>
+						<a href=<%= "/profile/"+user.github.username %>><div class="profile"><%= user.github.first %></div></a>
+					<% } else { %>
+						<a href="/auth/github"><div class="nav" id="login">Log in with Github</div></a>
+					<% } %>
+				</div>
+			</div>
+		</div>
+		
+		<%- body %>
+		
+	</body>
+</html>
