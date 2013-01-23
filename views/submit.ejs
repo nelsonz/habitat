@@ -1,13 +1,39 @@
 <div id="content">
-    <form name="input" action="/submit" method="post">
-        Title: <input type="text" name="title" placeholder="Hack name" required>
-        Team: <input type="text" name="team" placeholder="Team members" required>
-        Source: <input type="text" name="source" placeholder="Source URL">
-        Demo: <input type="text" name="demo" placeholder="Demo URL">
-        Image: <input type="text" name="picture" size="chars" placeholder="Image URL">
-        Video: <input type="text" name="video" placeholder="Video URL">
-        Description: <textarea name="blurb" rows=8 col=100 ></textarea>
-        Tags: <input type="text" name="tags">
-        <input type="submit" value="Submit">
-    </form>
+	<div class="column" id="links">
+		<% for (var i=0; i<8; i++) { %>
+			<div class="blank square twocol"></div>
+		<% } %>
+    </div>
+    <div class="form_container">
+        <p class="form_line header">Submit your Hack!</p>
+        <form name="input" action="/submit" method="post">
+            <div class="form_container">
+                <p class="form_line">Title</p>
+                <p class="form_line">Team</p>
+                <p class="form_line">Source</p>
+                <p class="form_line">Demo</p>
+                <p class="form_line">Image</p>
+                <p class="form_line">Video</p>
+                <p class="form_line">Tags</p>
+                <p class="form_line">Description</p>
+            </div>
+            <div class="form_container">
+                <br/>
+                <input class="form_input" type="text" name="title" placeholder="Hack name" required>
+                <input class="form_input" type="text" name="team" placeholder="Team members" required>
+                <input class="form_input" type="text" name="source" placeholder="Source URL">
+                <input class="form_input" type="text" name="demo" placeholder="Demo URL">
+                <input class="form_input" type="text" name="picture" size="chars" placeholder="Image URL">
+                <input class="form_input" type="text" name="video" placeholder="Video URL">
+                <input class="form_input" type="text" name="tags">
+                <textarea class="form_input" name="blurb" rows= col=100 ></textarea>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+	<div class="column" id="links" >
+		<% for (var i=0; i<8; i++) { %>
+			<div class="blank square twocol"></div>
+		<% } %>
+    </div>
 </div>

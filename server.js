@@ -14,7 +14,7 @@ var port = 8000,
 	local_db = 'mongodb://localhost/hackerfair',
 	app = module.exports = express.createServer(),
 	SITE_URL = local_url,
-	MONGO_URI = mongohq_db; //change back to local_db later
+	MONGO_URI = local_db;
 	
 if (process.argv[2] == "production") {
 	SITE_URL = heroku_url;
@@ -69,11 +69,10 @@ passport.use(
 			if (!doc) {
 				doc = new User();
 			}
-			doc.github.username = profile.username;
-			doc.github.url = profile.profileUrl;
-			doc.github.avatarUrl = profile._json.avatar_url;
-			doc.github.name = profile._json.name;
-			doc.github.email = profile.emails[0]["value"];
+			doc.username = profile.displayName;
+			doc.first = profile.givenName;
+			doc.last = profile.familyName;
+			doc.email = profile.emails[0];
 			doc.save(errorCallback);
 			done(err, doc);
 		});
@@ -84,7 +83,7 @@ app.get('/auth/github', passport.authenticate('github'));
 
 app.get('/auth/github/callback', 
 	passport.authenticate('github', {
-		failureRedirect: '/',
+		failureRedirect: '/login',
 	}),
 	function(req, res) {
 		res.redirect('/');
@@ -133,7 +132,10 @@ app.get('/hacks', function(req, res) {
 });
 
 app.get('/hacks/:id', function(req, res) {
-	Hack.findById(req.params.id, function(err, doc) {
+	User.findById({
+		"github.username": req.params.username,
+	}, function(err, doc) {
+		
 		res.render('hack', {
 			title: 'hack',
 			user: req.user,
@@ -163,8 +165,6 @@ app.post('/submit', function(req, res) {
 	
 	var team = req.body.team.split(',').map(stripSpaces);
 
-    console.log(hack);
-	
 	for (var i=0; i<team.length; i++) {
 		User.findOne({
 			"github.username": team[i],
@@ -177,10 +177,11 @@ app.post('/submit', function(req, res) {
 			}
 		});
 	}
+
+    console.log(hack);
 });
 
 app.get('/', function(req, res) {
-	console.log(req.user);
 	res.render('index', {
 		title: 'home',
 		user: req.user,
