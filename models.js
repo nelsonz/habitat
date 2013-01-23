@@ -13,7 +13,6 @@ exports.HackSchema = new Schema({
 	demo: String,
 	video: String,
 	pictures: String,
-	when: String,
 	blurb: {type: String, required: true},
 	tags: [String],
 });
