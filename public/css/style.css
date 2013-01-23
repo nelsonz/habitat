@@ -38,6 +38,11 @@ body {
 	cursor: pointer;
 }
 
+.dumbnav {
+	padding: 0px 2px 0px 0px;
+	cursor: default;
+}
+
 .nav:hover {
 	background-color: green;
 }
