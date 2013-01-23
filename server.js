@@ -164,6 +164,8 @@ app.post('/submit', function(req, res) {
 	});
 	
 	var team = req.body.team.split(',').map(stripSpaces);
+
+    console.log(hack);
 	
 	for (var i=0; i<team.length; i++) {
 		User.findOne({
