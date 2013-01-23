@@ -21,9 +21,10 @@ exports.UserSchema = new Schema({
 	github: {
 		id: String,
 		username: String,
-		first: String,
-		last: String,
+		name: String,
 		email: {type: String, set: toLower, lowercase: true},
+		url: String,
+		avatarUrl: String,
 	},
 	info: {
 		organization: String,
