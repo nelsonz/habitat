@@ -1,0 +1,26 @@
+<div id="content">
+	<div id="hack">
+		<!--access to "title", "user" -->
+		<div id="title">
+			<h1><%= title %></h1>
+
+		</div>
+		<div id="descrip">
+			<p id="info">
+				blahblahblah
+			</p>
+		</div>
+		<div id="share">
+		</div>
+		<div id="team">
+			<% for (var i=0; i<owners.length; i++) { %>
+				<div class="person">
+					<!--still need to hash the email with md5 -->
+					<% var hash=owners[i].email %>
+					<img src=<%= "http://www.gravitar.com/avatar/" +  hash %> >
+					<h2><%= owners[i].first + " " + owners[i].last %></h2>
+				</div>
+			<% } %>
+		</div>
+	</div>
+</div>
