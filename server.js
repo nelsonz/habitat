@@ -82,7 +82,7 @@ passport.use(
 	}
 ));
 
-app.get('/auth/github', passport.authenticate('github'));
+app.get('/login', passport.authenticate('github'));
 
 app.get('/auth/github/callback', 
 	passport.authenticate('github', {
