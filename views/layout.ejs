@@ -18,7 +18,7 @@
 				<div style="right: 0px; float:right;">
 					<% if (user) { %>
 						<div class="dumbnav">Welcome, </div>
-						<a href=<%= "/profile/"+user.github.username %>><div class="nav" id="profile"><%= user.github.name %></div></a>
+						<a href=<%= "/profile/"+user.github.username %>><div class="nav" id="profile"><%= user.github.name+"!" %></div></a>
 					<% } else { %>
 						<a href="/auth/github"><div class="nav" id="login">Log in with Github</div></a>
 					<% } %>

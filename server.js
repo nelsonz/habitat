@@ -175,10 +175,17 @@ app.post('/submit', function(req, res) {
 			}
 		});
 	}
+	
+	hack.save(function(err, doc) {
+		if (err) {
+			console.log(err);
+		}
+		console.log(doc);
+		res.redirect('/hacks');
+	});
 });
 
 app.get('/', function(req, res) {
-	console.log(req.user);
 	res.render('index', {
 		title: 'home',
 		user: req.user,
