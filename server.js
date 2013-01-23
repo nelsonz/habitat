@@ -66,9 +66,11 @@ passport.use(
 		callbackURL: SITE_URL+"/auth/github/callback",
 	}, function(accessToken, refreshToken, profile, done) {
 		User.findOne({"github.id": profile.id}, function(err, doc) {
+			console.log(profile);
 			if (!doc) {
 				doc = new User();
 			}
+			doc.github.id = profile.id;
 			doc.github.username = profile.username;
 			doc.github.url = profile.profileUrl;
 			doc.github.avatarUrl = profile._json.avatar_url;
