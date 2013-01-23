@@ -66,7 +66,6 @@ passport.use(
 		callbackURL: SITE_URL+"/auth/github/callback",
 	}, function(accessToken, refreshToken, profile, done) {
 		User.findOne({"github.id": profile.id}, function(err, doc) {
-			console.log(profile);
 			if (!doc) {
 				doc = new User();
 			}
@@ -98,7 +97,7 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-app.get('/hackers', function(req, res) {
+app.get('/users', function(req, res) {
 	User.find({}, function(err, docs) {
 		res.render('hackers', {
 			title: 'hackers',
@@ -108,7 +107,7 @@ app.get('/hackers', function(req, res) {
 	});
 });
 
-app.get('/hackers/:username', function(req, res) {
+app.get('/users/:username', function(req, res) {
 	User.findOne({
 		"github.username": req.params.username,
 	}, function(err, doc) {
@@ -120,11 +119,11 @@ app.get('/hackers/:username', function(req, res) {
 	});
 });
 
-app.post('/hackers/:username', function(req, res) {
+app.post('/users/:username', function(req, res) {
 	
 });
 
-app.get('/hacks', function(req, res) {
+app.get('/projects', function(req, res) {
 	Hack.find({}, function(err, docs) {
 		res.render('hacks', {
 			title: 'hacks',
@@ -134,7 +133,7 @@ app.get('/hacks', function(req, res) {
 	});
 });
 
-app.get('/hacks/:id', function(req, res) {
+app.get('/projects/:id', function(req, res) {
 	User.findById({
 		"github.username": req.params.username,
 	}, function(err, doc) {
@@ -169,16 +168,18 @@ app.post('/submit', function(req, res) {
 	var team = req.body.team.split(',').map(stripSpaces);
 
 	for (var i=0; i<team.length; i++) {
-		User.findOne({
-			"github.username": team[i],
-		}, function(err, doc) {
-			if (doc) {
-				hack.owners.push(doc._id);
-			}
-			else {
-				hack.team.push(team[i]);
-			}
-		});
+		(function(member) {
+			User.findOne({
+				"github.username": member,
+			}, function(err, doc) {
+				if (doc) {
+					hack.owners.push(doc._id);
+				}
+				else {
+					hack.team.push(member);
+				}
+			});
+		})(team[i]);
 	}
 	
 	hack.save(function(err, doc) {

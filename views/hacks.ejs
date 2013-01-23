@@ -1,10 +1,19 @@
 <div id="content">
 	<div class="grid" id="hackGrid">
-		<% var squarecount; %>
-		<% for (var i=0; i<hacks.length; i++) { %>
+		<% var squarecount = 0; %>
+		<% for (var i=0; i<hacks.length; i++) { squarecount++; %>
 			<div class="square" id="logo">
 				<div class="squaretext"><span><%= hacks[i].title %></span></div>
 			</div>
+			<% if (Math.random() > 0.6) { squarecount++; %>
+				<div class="blank square"></div>
+				<% if (Math.random() > 0.6) { squarecount++; %>
+					<div class="blank square"></div>
+				<% } %>
+			<% } %>
+		<% } %>
+		<% var remainder = ((squarecount < 40) ? 40 : 8*((squarecount / 8) + 1)) - squarecount; %>
+		<% for (var i=0; i<remainder; i++) { %>
 			<div class="blank square"></div>
 		<% } %>
 	</div>

@@ -11,8 +11,8 @@
 			<div id="headercentre">
 				<div style="left: 0px; margin-left: -0.5%;">
 					<div class="nav" id=".">home</div>
-					<div class="nav" id="hackers">hackers</div>
-					<div class="nav" id="hacks">hacks</div>
+					<div class="nav" id="users">hackers</div>
+					<div class="nav" id="projects">hacks</div>
 					<div class="nav" id="submit">submit</div>
 				</div>
 				<div style="right: 0px; float:right;">
@@ -20,7 +20,7 @@
 						<div class="dumbnav">Welcome, </div>
 						<a href=<%= "/profile/"+user.github.username %>><div class="nav" id="profile"><%= user.github.name+"!" %></div></a>
 					<% } else { %>
-						<a href="/auth/github"><div class="nav" id="login">Log in with Github</div></a>
+						<div class="nav" id="login">Log in with Github</div>
 					<% } %>
 				</div>
 			</div>
