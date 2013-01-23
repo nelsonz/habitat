@@ -132,9 +132,10 @@ app.get('/hacks', function(req, res) {
 });
 
 app.get('/hacks/:id', function(req, res) {
-	User.findOne({
+	User.findById({
 		"github.username": req.params.username,
 	}, function(err, doc) {
+		
 		res.render('hack', {
 			title: 'hack',
 			user: req.user,
