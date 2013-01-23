@@ -158,7 +158,6 @@ app.post('/submit', function(req, res) {
 		demo: req.body.demo,
 		video: req.body.video,
 		pictures: req.body.pictures,
-		when: req.body.when,
 		blurb: req.body.blurb,
 		tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
 	});
