@@ -70,19 +70,12 @@ passport.use(
 			if (!doc) {
 				doc = new User();
 			}
-<<<<<<< HEAD
-			doc.username = profile.displayName;
-			doc.first = profile.givenName;
-			doc.last = profile.familyName;
-			doc.email = profile.emails[0];
-=======
 			doc.github.id = profile.id;
 			doc.github.username = profile.username;
 			doc.github.url = profile.profileUrl;
 			doc.github.avatarUrl = profile._json.avatar_url;
 			doc.github.name = profile._json.name;
 			doc.github.email = profile.emails[0]["value"];
->>>>>>> 7349b3cd485268ebe0a0fa82522ff9ec4f3b5416
 			doc.save(errorCallback);
 			done(err, doc);
 		});
@@ -195,6 +188,7 @@ app.post('/submit', function(req, res) {
 		console.log(doc);
 		res.redirect('/hacks');
 	});
+    console.log("Saved");
 });
 
 app.get('/', function(req, res) {
