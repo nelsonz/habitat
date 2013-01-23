@@ -21,7 +21,7 @@ body {
 	margin-right: auto;
 }
 
-.nav {
+.nav, .dumbnav {
 	font-size: 13px;
 	color: #fff;
 	letter-spacing: 0px;
@@ -67,7 +67,7 @@ body {
 
 .blank {
 	background-color: #ddd;
-	cursor: none;
+	cursor: default;
 }
 
 .blank:hover {
