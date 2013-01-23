@@ -1,15 +1,7 @@
 {
-  "name": "faire",
+  "name": "hackerfair",
   "version": "0.0.0",
-  "description": "hacker faire",
   "main": "server.js",
-  "scripts": {
-    "test": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@heroku.com:gentle-hollows-2295.git"
-  },
   "author": "",
   "license": "BSD",
   "dependencies": {
