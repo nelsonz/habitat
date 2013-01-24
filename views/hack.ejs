@@ -30,7 +30,9 @@
 			<% } %>
 			<% if (hack.demo) { squarecount++;%>
 				<div class="square threecol external link" name=<%= hack.demo %>>
-					<div class="squaretext" style="background-color: green; opacity: 0.5;"><span>DEMO</span></div>
+					<div class="squaretext" style="background-color: green; opacity: 0.5;">
+						<div class="squaretitle">DEMO</div>
+					</div>
 				</div>
 				<% if (Math.random() > 0.6) { squarecount++; %>
 					<div class="blank square threecol"></div>
