@@ -35,7 +35,7 @@ $(function() {
 		transition((($(this).attr('class').split(' ').indexOf('external') > -1) ? '' : '/') + $(this).attr('name'));
 	});
 	
-	$(".form_input").click(function() {
+	$(".form_input").focus(function() {
 	  $(this).attr('value', $(this).attr('data-default'));
 	});
 });

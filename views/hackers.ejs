@@ -5,7 +5,7 @@
 			<div class="square link" name=<%= users[i].github.username %>>
 				<span><%= users[i].info.name %></span>
 				<% if (users[i].github.avatarUrl) { %>
-					<img src=<%= users[i].github.avatarUrl %> style="width: 100%;"></img>
+					<img src=<%= users[i].github.avatarUrl+"?s=200" %> style="width: 100%;"></img>
 				<% } %>
 				<div class="squaretext">
 				</div>

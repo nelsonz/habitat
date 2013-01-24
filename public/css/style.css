@@ -290,6 +290,16 @@ p {
 	opacity: 0.9;
 	position: absolute;
 	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.square:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
 }
 
 .squaretext>.squaretitle {
