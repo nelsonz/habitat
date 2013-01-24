@@ -39,7 +39,7 @@
 				<% } %>
 			<% } %>
 			<% for (var member in team) { squarecount++; %>
-				<div class="square threecol link" name=<%= member %>>
+				<div class="square threecol link" name=<%= "/users/"+member %>>
 					<span><%= team[member].name %></span>
 					<% if (team[member].avatarUrl) { %>
 						<img src=<%= team[member].avatarUrl+"?s=200" %> style="width: 100%;"></img>
