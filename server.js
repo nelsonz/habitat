@@ -8,21 +8,29 @@ var express = require('express'),
 	models = require('./models');
 	
 var port = 8000,
-	heroku_url = "http://gentle-hollows-2295.herokuapp.com",
+	heroku_url = "http://hf.hackersatberkeley.com",
 	local_url = "http://localhost:"+port,
 	mongohq_db = "mongodb://heroku:hack@linus.mongohq.com:10063/app11021922",
 	local_db = 'mongodb://localhost/hackerfair',
-	app = module.exports = express.createServer(),
-	SITE_URL = local_url,
-	MONGO_URI = local_db;
+	production_gitID = "1e20347862b454010624",
+	production_gitSecret = "07d5894deb8fa618d63ddf7c5de2b259346f7740",
+	local_gitID = "1771ed921581c00d677e",
+	local_gitSecret = "f107369fd2c33bbbed9bd25132edbe9df717bdea";
 	
-if (process.argv[2] == "test") {
+var app = module.exports = express.createServer(),
+	SITE_URL = local_url,
+	MONGO_URI = mongohq_db,
+	GIT_ID = local_gitID,
+	GIT_SECRET = local_gitSecret;
+	
+if (process.argv[2] == "production") {
 	SITE_URL = heroku_url;
 	MONGO_URI = mongohq_db;
+	GIT_ID = production_gitID;
+	GIT_SECRET = production_gitSecret;
 }
 	
-var db = mongoose.connect(mongohq_db), //revert
-	hack_counter = 0;
+var db = mongoose.connect(MONGO_URI);
 
 function errorCallback(err) {
 	if (err) {
@@ -82,8 +90,8 @@ passport.deserializeUser(function(id, done) {
 
 passport.use(
 	new GithubPass({
-		clientID: "1e20347862b454010624",
-		clientSecret: "07d5894deb8fa618d63ddf7c5de2b259346f7740",
+		clientID: GIT_ID,
+		clientSecret: GIT_SECRET,
 		callbackURL: SITE_URL+"/auth/github/callback",
 	}, function(accessToken, refreshToken, profile, done) {
 		User.findOne({"github.id": profile.id}, function(err, doc) {
