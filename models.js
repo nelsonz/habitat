@@ -12,9 +12,10 @@ exports.HackSchema = new Schema({
 	source: String,
 	demo: String,
 	video: String,
-	pictures: String,
+	picture: String,
 	blurb: {type: String, required: true},
 	tags: [String],
+	hackid: String,
 });
 
 exports.UserSchema = new Schema({
@@ -27,6 +28,7 @@ exports.UserSchema = new Schema({
 		avatarUrl: String,
 	},
 	info: {
+		name: String,
 		organization: String,
 		position: String,
 		site: String,

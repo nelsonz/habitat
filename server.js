@@ -16,12 +16,13 @@ var port = 8000,
 	SITE_URL = local_url,
 	MONGO_URI = local_db;
 	
-if (process.argv[2] == "production") {
+if (process.argv[2] == "test") {
 	SITE_URL = heroku_url;
 	MONGO_URI = mongohq_db;
 }
 	
-var db = mongoose.connect(mongohq_db);
+var db = mongoose.connect(mongohq_db), //revert
+	hack_counter = 0;
 
 function errorCallback(err) {
 	if (err) {
@@ -29,8 +30,28 @@ function errorCallback(err) {
 	}
 };
 
+function ensureAuthenticated(failureUrl) {
+  return function(req, res, next) {
+    if (req.isAuthenticated())
+      next();
+    else
+      res.redirect(failureUrl);
+  }
+}
+
+function forceAbsolute(url) {
+	if (url.indexOf('://') < 0) {
+		url = "http://" + url;
+	}
+	return url;
+}
+
 function stripSpaces(str) {
 	return str.replace(/^\s+|\s+$/g,'');
+}
+
+function stripPunct(str) {
+	return str.replace(/[^a-zA-Z0-9]+/g, '').replace('/ {2,}/',' ');
 }
 
 app.configure(function() {
@@ -68,11 +89,12 @@ passport.use(
 		User.findOne({"github.id": profile.id}, function(err, doc) {
 			if (!doc) {
 				doc = new User();
+				doc.info.name = profile._json.name;
 			}
 			doc.github.id = profile.id;
 			doc.github.username = profile.username;
 			doc.github.url = profile.profileUrl;
-			doc.github.avatarUrl = profile._json.avatar_url;
+			doc.github.avatarUrl = profile._json.avatar_url.split('?')[0];
 			doc.github.name = profile._json.name;
 			doc.github.email = profile.emails[0]["value"];
 			doc.save(errorCallback);
@@ -85,7 +107,7 @@ app.get('/login', passport.authenticate('github'));
 
 app.get('/auth/github/callback', 
 	passport.authenticate('github', {
-		failureRedirect: '/login',
+		failureRedirect: '/',	//add failure page
 	}),
 	function(req, res) {
 		res.redirect('/');
@@ -111,11 +133,23 @@ app.get('/users/:username', function(req, res) {
 	User.findOne({
 		"github.username": req.params.username,
 	}, function(err, doc) {
-		res.render('profile', {
-			title: 'profile',
-			user: req.user,
-			viewing: doc,
-		});
+		if (doc) {
+			Hack.find({
+				'team': {
+					$all: [req.params.username],
+				}
+			}, function(err, docs) {
+				res.render('profile', {
+					title: 'profile',
+					user: req.user,
+					viewing: doc,
+					hacks: docs,
+				});
+			});
+		}
+		else {
+			res.redirect('https://github.com/'+req.params.username);
+		}
 	});
 });
 
@@ -134,19 +168,39 @@ app.get('/projects', function(req, res) {
 });
 
 app.get('/projects/:id', function(req, res) {
-	User.findById({
-		"github.username": req.params.username,
+	Hack.findOne({
+		"hackid": req.params.id,
 	}, function(err, doc) {
+		var team = {};
 		
-		res.render('hack', {
-			title: 'hack',
-			user: req.user,
-			viewing: doc,
+		for (var i=0; i<doc.team.length; i++) {
+			team[doc.team[i]] = {
+				name: doc.team[i],
+			};
+		}
+		
+		User.where('github.username').in(doc.team).exec(function(err, docs) {
+			for (var i=0; i<docs.length; i++) {
+				team[docs[i].github.username] = {
+					name: docs[i].info.name,
+					avatarUrl: docs[i].github.avatarUrl,
+				};
+			}
+			res.render('hack', {
+				title: doc.title,
+				user: req.user,
+				hack: doc,
+				team: team,
+			});
 		});
 	});
 });
 
-app.get('/submit', function(req, res) {
+app.post('/projects/:id', function(req, res) {
+	
+});
+
+app.get('/submit', ensureAuthenticated('/login'), function(req, res) {
 	res.render('submit', {
 		title: 'submit hack',
 		user: req.user,
@@ -154,42 +208,52 @@ app.get('/submit', function(req, res) {
 });
 
 app.post('/submit', function(req, res) {
-	var hack = new Hack({
-		title: req.body.title,
-		owners: [req.user._id],
-		source: req.body.source,
-		demo: req.body.demo,
-		video: req.body.video,
-		pictures: req.body.pictures,
-		blurb: req.body.blurb,
-		tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
-	});
-	
-	var team = req.body.team.split(',').map(stripSpaces);
+	Hack.find({}, function(err, docs) {
+		var address = stripPunct(req.body.title.toLowerCase()),
+			collisions = 0;
+			docs.map(function(doc) {
+				collisions += (stripPunct(doc.title.toLowerCase()) == address ? 1 : 0);
+			}).length;
 
-	for (var i=0; i<team.length; i++) {
-		(function(member) {
-			User.findOne({
-				"github.username": member,
-			}, function(err, doc) {
-				if (doc) {
-					hack.owners.push(doc._id);
-				}
-				else {
-					hack.team.push(member);
-				}
-			});
-		})(team[i]);
-	}
-	
-	hack.save(function(err, doc) {
-		if (err) {
-			console.log(err);
+		var hack = new Hack({
+			title: req.body.title,
+			owners: [req.user._id],
+			source: forceAbsolute(req.body.source),
+			demo: forceAbsolute(req.body.demo),
+			video: forceAbsolute(req.body.video),
+			picture: forceAbsolute(req.body.picture),
+			blurb: req.body.blurb,
+			tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
+			hackid: address+"-"+Math.random().toString(36).substring(2, 8)+(collisions ? collisions : ""),
+			team: req.body.team.split(',').map(stripSpaces),
+		});
+
+		/*
+		var team = req.body.team.split(',').map(stripSpaces);
+		
+		for (var i=0; i<team.length; i++) {
+			(function(member) {
+				User.findOne({
+					"github.username": member,
+				}, function(err, doc) {
+					if (doc) {
+						hack.owners.push(doc._id);
+					}
+					else {
+						hack.team.push(member);
+						console.log(hack);
+					}
+				});
+			})(team[i]);
 		}
-		console.log(doc);
-		res.redirect('/hacks');
+		*/
+		hack.save(function(err, doc) {
+			if (err) {
+				console.log(err);
+			}
+			res.redirect('/projects/'+hack.hackid);
+		});
 	});
-    console.log("Saved");
 });
 
 app.get('/', function(req, res) {
@@ -199,4 +263,4 @@ app.get('/', function(req, res) {
 	});
 });
 
-app.listen(port);
+app.listen(process.env.PORT || port);

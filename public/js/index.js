@@ -6,6 +6,21 @@ function easeGrid(id, direction, maxtime) {
 	});
 };
 
+function transition(dest) {
+	var pagefade_delay = 0;
+	console.log(dest);
+	
+	$(".grid").each(function(i, e) {
+		easeGrid($(this).attr('id'), "out", gridfade_t);
+		pagefade_delay = gridfade_t / 2;
+	});
+	setTimeout(function() {
+		$("body").fadeOut(pagefade_t, function() {
+			window.location.href = dest;
+		});
+	}, pagefade_delay);
+}
+
 var gridfade_t = 500,
 	pagefade_t = 100;
 
@@ -16,19 +31,11 @@ $(function() {
 		});
 	});
 	
-	$(".nav").click(function() {
-		var dest = '/' + $(this).attr('id'),
-			pagefade_delay = 0;
-		
-		console.log(dest);
-		$(".grid").each(function(i, e) {
-			easeGrid($(this).attr('id'), "out", gridfade_t);
-			pagefade_delay = gridfade_t / 2;
-		});
-		setTimeout(function() {
-			$("body").fadeOut(pagefade_t, function() {
-				window.location.href = dest;
-			});
-		}, pagefade_delay);
+	$(".link").click(function() {
+		transition((($(this).attr('class').split(' ').indexOf('external') > -1) ? '' : '/') + $(this).attr('name'));
+	});
+	
+	$(".form_input").click(function() {
+	  $(this).attr('value', $(this).attr('data-default'));
 	});
 });

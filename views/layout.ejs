@@ -10,17 +10,18 @@
 		<div id="header">
 			<div id="headercentre">
 				<div style="left: 0px; margin-left: -0.5%;">
-					<div class="nav" id=".">home</div>
-					<div class="nav" id="users">hackers</div>
-					<div class="nav" id="projects">hacks</div>
-					<div class="nav" id="submit">submit</div>
+					<div class="nav link" name=".">home</div>
+					<div class="nav link" name="users">hackers</div>
+					<div class="nav link" name="projects">hacks</div>
+					<div class="nav link" name="submit">submit</div>
 				</div>
 				<div style="right: 0px; float:right;">
 					<% if (user) { %>
 						<div class="dumbnav">Welcome, </div>
 						<a href=<%= "/profile/"+user.github.username %>><div class="nav" id="profile"><%= user.github.name+"!" %></div></a>
+						<img class="nav link" name="logout" style="height: 18px; padding: 7px;" src="https://s3.amazonaws.com/hackerfair/logout_icon.png" />
 					<% } else { %>
-						<div class="nav" id="login">Log in with Github</div>
+						<div class="nav link" name="login">Log in with Github</div>
 					<% } %>
 				</div>
 			</div>
