@@ -6,7 +6,9 @@
         <span><%= hacks[i].title %></span>
         <% if (hacks[i].picture) { %>
           <img src=<%= hacks[i].picture %> style="width: 100%;">
-        <% } %>
+        <% } else { %>
+		<img src="https://s3.amazonaws.com/hackerfair/hack-logo-black-png.png" style="width: 100%;">
+		<% } %>
         <div class="squaretext"></div>
       </div>
       <% if (Math.random() > 0.6) { squarecount++; %>

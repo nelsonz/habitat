@@ -188,6 +188,7 @@ app.get('/projects/:id', function(req, res) {
 		for (var i=0; i<doc.team.length; i++) {
 			team[doc.team[i]] = {
 				name: doc.team[i],
+				avatarUrl: "https://s3.amazonaws.com/hackerfair/default-photo.jpg"
 			};
 		}
 		
