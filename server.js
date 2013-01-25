@@ -139,6 +139,8 @@ app.get('/users', function(req, res) {
 });
 
 app.get('/users/:username', function(req, res) {
+	res.redirect('https://github.com/'+req.params.username);
+	/*
 	User.findOne({
 		"github.username": req.params.username,
 	}, function(err, doc) {
@@ -160,6 +162,7 @@ app.get('/users/:username', function(req, res) {
 			res.redirect('https://github.com/'+req.params.username);
 		}
 	});
+	*/
 });
 
 app.post('/users/:username', function(req, res) {
