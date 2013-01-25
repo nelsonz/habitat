@@ -205,8 +205,30 @@ app.get('/projects/:id', function(req, res) {
 	});
 });
 
+app.get('/projects/:id/edit', ensureAuthenticated('/login'), function(req, res) {
+	Hack.findOne({
+		"hackid": req.params.id,
+	}, function(err, doc) {
+		if (doc.owners.indexOf(req.user._id) < 0) {
+			res.redirect('/projects/'+req.params.id);
+		}
+		else {
+			User.where('_id').in(doc.owners).exec(function(err, docs) {
+				res.render('edit_hack', {
+					title: doc.title,
+					user: req.user,
+					hack: doc,
+					owners: docs.map(function(owner) {
+						return owner.github.username;
+					}),
+				});
+			});
+		}
+	});
+});
+
 app.post('/projects/:id', function(req, res) {
-	
+	console.log(req.body);
 });
 
 app.get('/submit', ensureAuthenticated('/login'), function(req, res) {
