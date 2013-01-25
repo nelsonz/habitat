@@ -3,7 +3,7 @@
 		<% var squarecount = 0; %>
 		<% for (var i=0; i<users.length; i++) { squarecount++; %>
 			<div class="square link" name=<%= "users/"+users[i].github.username %>>
-				<span><%= users[i].info.name %></span>
+				<span><%= (users[i].info.name || users[i].github.username)%></span>
 				<% if (users[i].github.avatarUrl) { %>
 					<img src=<%= users[i].github.avatarUrl+"?s=200" %> style="width: 100%;"></img>
 				<% } %>
