@@ -36,6 +36,8 @@ $(function() {
 	});
 	
 	$(".form_input").focus(function() {
-	  $(this).attr('value', $(this).attr('data-default'));
+		if (!$(this).attr('value')) {
+			$(this).attr('value', $(this).attr('data-default'));
+		}
 	});
 });

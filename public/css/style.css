@@ -102,7 +102,6 @@ body {
 	line-height: 32px;
 	text-align: center;
 	font-family: 'Code-Pro-Demo';
-	
 	padding-bottom: 10px;
 }
 
@@ -242,6 +241,7 @@ body {
 	padding-top: 4px;
 	padding-bottom: 4px;
 	position: absolute;
+	font-family: 'Code-Pro-Demo';
 }
 
 .container {
@@ -255,7 +255,8 @@ body {
 	position: relative;
 }
 
-#cover { 
+#cover { 	
+	font-family: Play;
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -319,7 +320,7 @@ p {
 
 .front {
 	background-color: green;
-	opacity: 0.5;
+	opacity: 0.6;
 }
 
 .front:hover {
