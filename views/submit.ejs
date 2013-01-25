@@ -8,7 +8,7 @@
         <p class="form_line title">submit your hack!</p>
         <form name="input" action="/submit" method="post">
             <div class="wide_container">
-                <input class="form_input" type="text" name="title" placeholder="hack name" required>
+                <input class="form_input" type="text" name="title" placeholder="hack title" required>
                 <input class="form_input" type="text" name="team" data-default=<%= "'"+user.github.username+", '" %> placeholder = "team members (github or real name)" required>
                 <input class="form_input" type="text" name="source" placeholder="source URL">
                 <input class="form_input" type="text" name="demo" placeholder="demo URL">
