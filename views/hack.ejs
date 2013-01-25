@@ -58,11 +58,14 @@
           </img>
         </div>
       <% } %>
-      <% var remainder = (3*(Math.floor(squarecount / 3) + (squarecount % 3 == 0 ? 0 : 1))) - squarecount; %>
+	  <% var remainder = (3*(Math.floor(squarecount / 3) + (squarecount % 3 == 0 ? 0 : 1))) - squarecount; %>
       <% for (var i=0; i<remainder; i++) { %>
         <div class="blank square threecol"></div>
       <% } %>
     </div>
+	<% if (hack.owners.indexOf(user._id) >=0) { %>
+		<a href=<%= hack.hackid + "/edit" %>><input type="submit" class="submit cardcol" value="edit"></a>
+	<% } %>
     </div>
   <div class="grid column" id="links" >
     <% for (var i=0; i<16; i++) { %>
