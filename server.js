@@ -195,7 +195,7 @@ app.get('/projects/:id', function(req, res) {
 		User.where('github.username').in(doc.team).exec(function(err, docs) {
 			for (var i=0; i<docs.length; i++) {
 				team[docs[i].github.username] = {
-					name: docs[i].info.name,
+					name: docs[i].info.name || docs[i].github.name || docs[i].github.username,
 					avatarUrl: docs[i].github.avatarUrl,
 				};
 			}
@@ -239,18 +239,20 @@ app.post('/projects/:id', ensureAuthenticated('/login'), function(req, res) {
 		if (doc.owners.indexOf(req.user._id) < 0) {
 			res.redirect('/projects/'+req.params.id);
 		} else {
-		  doc.title = req.body.title;
-		  doc.source = forceAbsolute(req.body.source);
-		  doc.demo = forceAbsolute(req.body.demo);
-		  doc.video = forceAbsolute(req.body.video);
-		  doc.picture = forceAbsolute(req.body.picture);
-		  doc.blurb = req.body.blurb;
-		  doc.tags = req.body.tags.toLowerCase().split(',').map(stripSpaces);
-		  doc.save(function(err, doc) {
-        res.redirect('/projects/'+doc.hackid);
-		  });
-    }
-  });
+			doc.title = req.body.title;
+			doc.source = forceAbsolute(req.body.source);
+			doc.demo = forceAbsolute(req.body.demo);
+			doc.video = forceAbsolute(req.body.video);
+			doc.picture = forceAbsolute(req.body.picture);
+			doc.blurb = req.body.blurb;
+			doc.tags = req.body.tags.toLowerCase().split(',').map(stripSpaces);
+			doc.booth = (req.body.booth == 'on');
+			console.log(doc.booth);
+			doc.save(function(err, doc) {
+				res.redirect('/projects/'+doc.hackid);
+			});
+		}
+	});
 });
 
 app.get('/submit', ensureAuthenticated('/login'), function(req, res) {
@@ -279,6 +281,7 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
 			tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
 			hackid: address+"-"+Math.random().toString(36).substring(2, 8)+(collisions ? collisions : ""),
 			team: req.body.team.split(',').map(stripSpaces),
+			booth: req.body.booth,
 		});
 
 		/*

@@ -63,7 +63,7 @@
       <% } %>
     </div>
 	<% if (user && hack.owners.indexOf(user._id) >=0) { %>
-		<a href=<%= hack.hackid + "/edit" %>><input type="submit" class="submit cardcol" value="edit"></a>
+		<input type="submit" class="submit cardcol" value="edit" onClick="window.location.href += '/edit'"></a>
 	<% } %>
     </div>
   <div class="grid column" id="links" >

@@ -93,7 +93,8 @@ body {
 }
 
 .form_line {
-	font-size: 24px;
+	font-size: 18px;
+	font-family: Anaheim;
 }
 
 .title {
@@ -350,4 +351,8 @@ input.submit {
 	font-family: Anaheim;
 	color: white;
 	background-color: green;
+}
+
+a {
+	text-decoration: none;
 }

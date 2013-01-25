@@ -17,7 +17,8 @@
                 <input class="form_input" type="text" name="video" placeholder="video URL" value=<%= hack.video %>>
                 <input class="form_input" type="text" name="tags" placeholder="tags (comma separated)" value=<%= hack.tags %>>
                 <textarea class="form_input" placeholder="description" name="blurb" rows=7 col=100 style="line-height: 18px;" required><%= hack.blurb %></textarea>
-                <input type="submit" class="submit" value="Submit">
+                <div class="form_line"><input type="checkbox" name="booth" checked=<%= hack.booth ? "yes" : "no" %>></input>Reserve a booth to demo</div>
+				<input type="submit" class="submit" value="Submit">
             </div>
         </form>
     </div>

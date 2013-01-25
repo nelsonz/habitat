@@ -16,6 +16,7 @@ exports.HackSchema = new Schema({
 	blurb: {type: String, required: true},
 	tags: [String],
 	hackid: String,
+	booth: {type: Boolean, default: false},
 });
 
 exports.UserSchema = new Schema({
