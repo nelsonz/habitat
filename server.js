@@ -48,7 +48,7 @@ function ensureAuthenticated(failureUrl) {
 }
 
 function forceAbsolute(url) {
-	if (url.indexOf('://') < 0) {
+	if (url && url.indexOf('://') < 0) {
 		url = "http://" + url;
 	}
 	return url;
