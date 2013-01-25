@@ -1,22 +1,22 @@
 <div id="content">
-	<div class="grid" id="userGrid">
-		<% var squarecount = 0; %>
-		<% for (var i=0; i<users.length; i++) { squarecount++; %>
-			<div class="square link" name=<%= "users/"+users[i].github.username %>>
-				<span><%= (users[i].info.name || users[i].github.username)%></span>
-				<% if (users[i].github.avatarUrl) { %>
-					<img src=<%= users[i].github.avatarUrl+"?s=200" %> style="width: 100%;"></img>
-				<% } %>
-				<div class="squaretext">
-				</div>
-			</div>
-			<% if (Math.random() > 0.6) { squarecount++; %>
-				<div class="blank square"></div>
-			<% } %>
-		<% } %>
-		<% var remainder = ((squarecount < 40) ? 40 : 8*(Math.floor(squarecount / 8) + (squarecount % 8 == 0 ? 0 : 1))) - squarecount; %>
-		<% for (var i=0; i<remainder; i++) { %>
-			<div class="blank square"></div>
-		<% } %>
-	</div>
+  <div class="grid" id="userGrid">
+    <% var squarecount = 0; %>
+    <% for (var i=0; i<users.length; i++) { squarecount++; %>
+      <div class="square link" name=<%= "users/"+users[i].github.username %>>
+        <span><%= (users[i].info.name || users[i].github.username)%></span>
+        <% if (users[i].github.avatarUrl) { %>
+          <img src=<%= users[i].github.avatarUrl+"?s=200" %> style="width: 100%;"></img>
+        <% } %>
+        <div class="squaretext">
+        </div>
+      </div>
+      <% if (Math.random() > 0.6) { squarecount++; %>
+        <div class="blank square"></div>
+      <% } %>
+    <% } %>
+    <% var remainder = ((squarecount < 40) ? 40 : 8*(Math.floor(squarecount / 8) + (squarecount % 8 == 0 ? 0 : 1))) - squarecount; %>
+    <% for (var i=0; i<remainder; i++) { %>
+      <div class="blank square"></div>
+    <% } %>
+  </div>
 </div>
