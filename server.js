@@ -73,6 +73,7 @@ app.configure(function() {
 	app.use(passport.session());
 	app.use(app.router);
 	app.use('/', express.static(__dirname + '/public'));
+	app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 });
 
 var User = mongoose.model('User', models.UserSchema),
