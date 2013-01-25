@@ -42,7 +42,7 @@ body {
 }
 
 .nav, .dumbnav {
-	font-family: Play;
+	font-family: Anaheim;
 	font-size: 16px;
 	color: #fff;
 	letter-spacing: 0px;
@@ -154,7 +154,6 @@ body {
 
 .squaretext:hover, #cover:hover {
 	opacity: 0.1;
-	background-color: black;
 }
 
 .blank {
@@ -256,7 +255,7 @@ body {
 }
 
 #cover { 	
-	font-family: Play;
+	font-family: Anaheim;
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -327,4 +326,13 @@ p {
 	opacity: 0.3;
 	-moz-transition: opacity .15s linear;
 	-webkit-transition: opacity .15s linear;
+}
+
+.demo {
+	background-color: green; 
+	opacity: 0.7;
+}
+
+.demo:hover {
+	opacity: 0.1;
 }

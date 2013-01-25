@@ -30,7 +30,7 @@
 			<% } %>
 			<% if (hack.demo) { squarecount++;%>
 				<div class="square threecol external link" name=<%= hack.demo %>>
-					<div class="squaretext" style="background-color: green; opacity: 0.5;">
+					<div class="squaretext demo">
 						<div class="squaretitle">DEMO</div>
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 				<% } %>
 			<% } %>
 			<% for (var member in team) { squarecount++; %>
-				<div class="square threecol link" name=<%= "/users/"+member %>>
+				<div class="square threecol link" name=<%= "users/"+member %>>
 					<span><%= team[member].name %></span>
 					<% if (team[member].avatarUrl) { %>
 						<img src=<%= team[member].avatarUrl+"?s=200" %> style="width: 100%;"></img>
