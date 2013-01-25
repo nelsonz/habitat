@@ -131,7 +131,7 @@ app.get('/logout', function(req, res) {
 app.get('/users', function(req, res) {
 	User.find({}, function(err, docs) {
 		res.render('hackers', {
-			title: 'hackers',
+			title: 'Hackers',
 			user: req.user,
 			users: docs,
 		});
@@ -149,7 +149,7 @@ app.get('/users/:username', function(req, res) {
 				}
 			}, function(err, docs) {
 				res.render('profile', {
-					title: 'profile',
+					title: 'Profile',
 					user: req.user,
 					viewing: doc,
 					hacks: docs,
@@ -169,7 +169,7 @@ app.post('/users/:username', function(req, res) {
 app.get('/projects', function(req, res) {
 	Hack.find({}, function(err, docs) {
 		res.render('hacks', {
-			title: 'hacks',
+			title: 'Hacks',
 			user: req.user,
 			hacks: docs,
 		});
@@ -211,12 +211,12 @@ app.post('/projects/:id', function(req, res) {
 
 app.get('/submit', ensureAuthenticated('/login'), function(req, res) {
 	res.render('submit', {
-		title: 'submit hack',
+		title: 'Submit Hack',
 		user: req.user,
 	});
 });
 
-app.post('/submit', function(req, res) {
+app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
 	Hack.find({}, function(err, docs) {
 		var address = stripPunct(req.body.title.toLowerCase()),
 			collisions = 0;
@@ -267,7 +267,7 @@ app.post('/submit', function(req, res) {
 
 app.get('/', function(req, res) {
 	res.render('index', {
-		title: 'home',
+		title: 'Home',
 		user: req.user,
 	});
 });
