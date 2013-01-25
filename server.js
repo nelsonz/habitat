@@ -227,8 +227,26 @@ app.get('/projects/:id/edit', ensureAuthenticated('/login'), function(req, res) 
 	});
 });
 
-app.post('/projects/:id', function(req, res) {
+app.post('/projects/:id', ensureAuthenticated('/login'), function(req, res) {
 	console.log(req.body);
+	Hack.findOne({
+	  "hackid": req.params.id,
+	}, function(err, doc) {
+		if (doc.owners.indexOf(req.user._id) < 0) {
+			res.redirect('/projects/'+req.params.id);
+		} else {
+		  doc.title = req.body.title;
+		  doc.source = forceAbsolute(req.body.source);
+		  doc.demo = forceAbsolute(req.body.demo);
+		  doc.video = forceAbsolute(req.body.video);
+		  doc.picture = forceAbsolute(req.body.picture);
+		  doc.blurb = req.body.blurb;
+		  doc.tags = req.body.tags.toLowerCase().split(',').map(stripSpaces);
+		  doc.save(function(err, doc) {
+        res.redirect('/projects/'+doc.hackid);
+		  });
+    }
+  });
 });
 
 app.get('/submit', ensureAuthenticated('/login'), function(req, res) {
