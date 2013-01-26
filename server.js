@@ -62,6 +62,20 @@ function stripPunct(str) {
 	return str.replace(/[^a-zA-Z0-9]+/g, '').replace('/ {2,}/',' ');
 }
 
+function shuffle(arr) {
+  var m = arr.length, t, i;
+
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+
+    t = arr[m];
+    arr[m] = arr[i];
+    arr[i] = t;
+  }
+
+  return arr;
+}
+
 app.configure(function() {
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'ejs');
@@ -133,7 +147,7 @@ app.get('/users', function(req, res) {
 		res.render('hackers', {
 			title: 'Hackers',
 			user: req.user,
-			users: docs,
+			users: shuffle(docs),
 		});
 	});
 });
