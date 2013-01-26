@@ -186,10 +186,12 @@ app.get('/projects/:id', function(req, res) {
 		var team = {};
 		
 		for (var i=0; i<doc.team.length; i++) {
-			team[doc.team[i]] = {
-				name: doc.team[i],
-				avatarUrl: "https://s3.amazonaws.com/hackerfair/default-photo.jpg"
-			};
+			if(doc.team[i]) {
+				team[doc.team[i]] = {
+					name: doc.team[i],
+					avatarUrl: "https://s3.amazonaws.com/hackerfair/default-photo.jpg"
+				};
+			}
 		}
 		
 		User.where('github.username').in(doc.team).exec(function(err, docs) {
@@ -280,7 +282,7 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
 			blurb: req.body.blurb,
 			tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
 			hackid: address+"-"+Math.random().toString(36).substring(2, 8)+(collisions ? collisions : ""),
-			team: req.body.team.split(',').map(stripSpaces),
+			team: req.body.team.stripSpaces.split(','),
 			booth: req.body.booth,
 		});
 
