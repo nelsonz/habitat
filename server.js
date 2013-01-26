@@ -282,7 +282,7 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
 			blurb: req.body.blurb,
 			tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
 			hackid: address+"-"+Math.random().toString(36).substring(2, 8)+(collisions ? collisions : ""),
-			team: req.body.team.stripSpaces.split(','),
+			team: req.body.team.split(',').map(stripSpaces),
 			booth: req.body.booth,
 		});
 
