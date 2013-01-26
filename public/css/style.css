@@ -313,7 +313,7 @@ p {
 	font-size: 20px;
 	line-height: 22px;
 	font-weight: bold;
-	width: 100%;
+	width: 90%;
 	color: white;
 	text-align: center;
 	display: inline-block;
@@ -354,5 +354,5 @@ input.submit {
 }
 
 a {
-	text-decoration: none;
+	color: white;
 }

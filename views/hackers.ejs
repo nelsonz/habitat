@@ -1,6 +1,9 @@
 <div id="content">
   <div class="grid" id="userGrid">
-    <% var squarecount = 0; %>
+    <% var squarecount = 1; %>
+	<div class="blank square">
+		<div class="front squaretext"><div class="squaretitle">Presenters: Please arrive by <a href="#">1:30PM</a> for setup!</div></div>
+    </div>
     <% for (var i=0; i<users.length; i++) { squarecount++; %>
       <div class="square link" name=<%= "users/"+users[i].github.username %>>
         <span><%= (users[i].info.name || users[i].github.username)%></span>
