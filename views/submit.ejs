@@ -1,0 +1,29 @@
+<div id="content">
+	<div class="grid column" id="links">
+		<% for (var i=0; i<10; i++) { %>
+			<div class="blank square twocol"></div>
+		<% } %>
+    </div>
+    <div class="mid_container">
+        <p class="form_line title">submit your hack!</p>
+        <form name="input" action="/submit" method="post">
+            <div class="wide_container">
+                <input class="form_input" type="text" name="title" placeholder="hack title" required>
+                <input class="form_input" type="text" name="team" data-default=<%= "'"+user.github.username+", '" %> placeholder = "team members (github or real name)" required>
+                <input class="form_input" type="text" name="source" placeholder="source URL">
+                <input class="form_input" type="text" name="demo" placeholder="demo URL">
+                <input class="form_input" type="text" name="picture" size="chars" placeholder="image URL">
+                <input class="form_input" type="text" name="video" placeholder="video URL">
+                <input class="form_input" type="text" name="tags" placeholder="tags (comma separated)">
+                <textarea class="form_input" placeholder="description" name="blurb" rows=7 col=100 style="line-height: 18px;" required></textarea>
+                <div class="form_line"><input type="checkbox" name="booth"></input>Reserve a booth to demo</div>
+				<input type="submit" class="submit cardcol" value="submit">
+            </div>
+        </form>
+    </div>
+	<div class="grid column" id="links" >
+		<% for (var i=0; i<10; i++) { %>
+			<div class="blank square twocol"></div>
+		<% } %>
+    </div>
+</div>

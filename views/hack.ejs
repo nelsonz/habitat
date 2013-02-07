@@ -1,0 +1,74 @@
+<div id="content">
+  <div class="grid column" id="links">
+    <% for (var i=0; i<16; i++) { %>
+      <div class="blank square twocol"></div>
+    <% } %>
+    </div>
+  <% var squarecount = 0; %>
+    <div class="mid_container">
+      <div class="container">
+        <% if (hack.picture) { %>
+          <img style="width: 100%; margin-top: 12.5%" src=<%= hack.picture %>></img>
+        <% } %>
+        <div id="cover">
+          <div id="hackbar">
+            <div id="hacktitle"><%= hack.title %></div>
+			<p><%= hack.blurb %></p>
+          </div>
+        </div>
+      </div>
+    <div class="grid" id="infoGrid" style="width: 75%; margin-left: auto; margin-right: auto;">
+      <% if (hack.video) { squarecount++;%>
+        <div class="square threecol external link" name=<%= hack.video %>>
+          <img src="https://s3.amazonaws.com/hackerfair/video_icon.png" style="width: 100%;" />
+            <div class="squaretext"></div>
+          </img>
+        </div>
+        <% if (Math.random() > 0.6) { squarecount++; %>
+          <div class="blank square threecol"></div>
+        <% } %>
+      <% } %>
+      <% if (hack.demo) { squarecount++;%>
+        <div class="square threecol external link" name=<%= hack.demo %>>
+          <div class="squaretext demo">
+            <div class="squaretitle">DEMO</div>
+          </div>
+        </div>
+        <% if (Math.random() > 0.6) { squarecount++; %>
+          <div class="blank square threecol"></div>
+        <% } %>
+      <% } %>
+      <% for (var member in team) { squarecount++; %>
+        <div class="square threecol link" name=<%= "users/"+member %>>
+          <span><%= team[member].name %></span>
+          <% if (team[member].avatarUrl) { %>
+            <img src=<%= team[member].avatarUrl+"?s=200" %> style="width: 100%;"></img>
+          <% } %>
+          <div class="squaretext"></div>
+        </div>
+        <% if (Math.random() > 0.6) { squarecount++; %>
+          <div class="blank square threecol"></div>
+        <% } %>
+      <% } %>
+      <% if (hack.source) { squarecount++;%>
+        <div class="square threecol external link" name=<%= hack.source %>>
+          <img src="https://s3.amazonaws.com/hackerfair/github_icon.jpg" style="width: 100%;">
+            <div class="squaretext"></div>
+          </img>
+        </div>
+      <% } %>
+	  <% var remainder = (3*(Math.floor(squarecount / 3) + (squarecount % 3 == 0 ? 0 : 1))) - squarecount; %>
+      <% for (var i=0; i<remainder; i++) { %>
+        <div class="blank square threecol"></div>
+      <% } %>
+    </div>
+	<% if (user && hack.owners.indexOf(user._id) >=0) { %>
+		<input type="submit" class="submit cardcol" value="edit" onClick="window.location.href += '/edit'"></a>
+	<% } %>
+    </div>
+  <div class="grid column" id="links" >
+    <% for (var i=0; i<16; i++) { %>
+      <div class="blank square twocol"></div>
+    <% } %>
+    </div>
+</div>
