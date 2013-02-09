@@ -327,6 +327,31 @@ app.get('/submit', ensureAuthenticated('/login'), function(req, res) {
   });
 });
 
+app.get('/summary/:eventname', function(req, res) {
+  if (false) {//['syadlowsky', 'viyer', 'vedantk', 'geraldgfong', 'nelsonz'].indexOf(req.user.github.username) < 0) {
+    res.redirect('/hacks');
+  } else {
+    var query = Hack.find({event:req.params.eventname});
+    query.exec(function(err, docs) {
+      console.log("Creating summary of event: "+req.params.eventname);
+      docs = shuffle(docs);
+      var respString = "";
+      for (var i = 0; i < docs.length; i++) {
+        console.log("Making report for "+docs[i]);
+        respString += docs[i].title+"\n";
+        respString += Array(docs[i].title.length+1).join("-")+"\n";
+        respString += "Description: "+docs[i].blurb+"\n";
+        respString += "       Team: "+docs[i].team.join(", ")+"\n";
+        respString += "\n";
+      }
+      console.log("Summary generation complete.");
+      res.attachment(req.params.eventname+".txt");
+      res.end(respString);
+      console.log("Completed transfer");
+    });
+  }
+});
+
 app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
   Hack.find({}, function(err, docs) {
     var address = stripPunct(req.body.title.toLowerCase()),
