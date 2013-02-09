@@ -11,9 +11,6 @@
       <% } %>
       <div class="squaretext"></div>
     </div>
-    <% if (Math.random() > 0.6) { squarecount++; %>
-    <div class="blank square"></div>
-    <% } %>
     <% } %>
 <% var remainder = ((squarecount < 40) ? 40 : 8*(Math.floor(squarecount / 8) + (squarecount % 8 == 0 ? 0 : 1))) - squarecount; %>
 <% for (var i=0; i<remainder; i++) { %>

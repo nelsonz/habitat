@@ -38,7 +38,6 @@ exports.UserSchema = new Schema({
 		site: String,
 		blurb: String,
 		attending: {type: Boolean, default: true},
-		booth: {type: Boolean, default: false},
 	},
 });
 /* END MODEL SCHEMAS */
