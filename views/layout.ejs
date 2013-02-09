@@ -18,7 +18,7 @@
 				<div style="right: 0px; float:right;">
 					<% if (user) { %>
 						<div class="dumbnav">Welcome, </div>
-						<a href=<%= "/profile/"+user.github.username %>><div class="nav" id="profile"><%= (user.github.name || user.github.username)+"!" %></div></a>
+						<a href=<%= "/users/"+user.github.username %>><div class="nav" id="profile"><%= (user.github.name || user.github.username)+"!" %></div></a>
 						<img class="nav link" name="logout" style="height: 18px; padding: 7px;" src="https://s3.amazonaws.com/hackerfair/logout_icon.png" />
 					<% } else { %>
 						<div class="nav link" name="login">Log in with Github</div>

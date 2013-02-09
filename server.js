@@ -168,8 +168,9 @@ app.get('/users', function(req, res) {
 
 // need actual profile pages
 app.get('/users/:username', function(req, res) {
+        /*
 	res.redirect('https://github.com/'+req.params.username);
-	/*
+	*/
 	User.findOne({
 		"github.username": req.params.username,
 	}, function(err, doc) {
@@ -191,7 +192,6 @@ app.get('/users/:username', function(req, res) {
 			res.redirect('https://github.com/'+req.params.username);
 		}
 	});
-	*/
 });
 
 // need to be able to edit profile page

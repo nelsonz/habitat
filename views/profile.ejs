@@ -1,0 +1,49 @@
+<div id="content">
+  <div class="grid column1" id="links">
+    <% for (var i=0; i<16; i++) { %>
+      <div class="blank square onecol"></div>
+    <% } %>
+  </div>
+  <div class="grid column" id="links">
+    <div class="square twocolumntwosquare">
+      <img src=<%= viewing.github.avatarUrl+"?s=400" %> style="width: 100%;"></img>
+    </div>
+    <% for (var i=0; i<12; i++) { %>
+      <div class="blank square twocol"></div>
+    <% } %>
+  </div>
+  <div class="grid column" id="links">
+    <div class="square twocolumn2by1rect">
+      <div class="squaretext"><div class="squaretitle"><% if (viewing.info.name) { %> <%= viewing.info.name %><br> @<%= viewing.github.username %> <% } else { %> @<%= viewing.github.username %><% } %> </div></div>
+    </div>
+    <% for (var i=0; i<14; i++) { %>
+      <div class="blank square twocol"></div>
+    <% } %>
+  </div>
+  <div class="grid column" id="links">
+    <% for (var i=0; i<16; i++) { %>
+      <div class="blank square twocol"></div>
+    <% } %>
+  </div>
+    <div class="square twosquare">
+      <div class="front squaretext"><div class="squaretitle">WOZNIAK LOUNGE <br> - SAT. 1/26 - <br> 1-4PM</div></div>
+    </div>
+    <% for (var i=0; i<3; i++) { %>
+      <div class="blank square"></div>
+    <% } %>
+    <% for (var i=0; i<3; i++) { %>
+      <div class="blank square"></div>
+    <% } %>
+             <div class="square link" name="login">
+                       <img src="https://s3.amazonaws.com/hackerfair/github_icon.jpg" style="width: 100%; opacity: 0.2;">
+                       <div class="front squaretext"><div class="squaretitle">rsvp</div></div>
+               </div>
+
+    <div class="square link" name="submit">
+      <div class="front squaretext"><div class="squaretitle">submit<br>hack</div></div>
+    </div>
+    <% for (var i=0; i<19; i++) { %>
+      <div class="blank square"></div>
+    <% } %>
+  </div>
+</div>
