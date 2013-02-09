@@ -21,7 +21,7 @@ port defaults to 8000
 var port = process.argv[3] || 8000,
   heroku_url = "http://hf.hackersatberkeley.com",
   local_url = "http://localhost:"+port,
-  local_db = 'mongodb://localhost/habitat:27017',
+  local_db = 'mongodb://localhost:27017/habitat',
   remote_db = process.env.MONGOHQ_URL || "mongodb://hab_test_db:hackallnightyoloswag2013@ds033187.mongolab.com:33187/heroku_app11021922",
   GIT_ID = process.env.gitID || "1771ed921581c00d677e",
   GIT_SECRET = process.env.gitSecret || "f107369fd2c33bbbed9bd25132edbe9df717bdea",
