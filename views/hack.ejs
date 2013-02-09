@@ -7,6 +7,7 @@
   <% var squarecount = 0; %>
     <div class="mid_container">
       <div class="container">
+<<<<<<< HEAD
         <div class="title-bar"> <h1 class="title"><%= hack.title %></h1> </div>
         <div class="hack-info row row-dark">
           <% if (hack.picture) { %>
@@ -22,6 +23,19 @@
         </div>
       </div>
       <div class="grid row-dark" id="infoGrid">
+=======
+        <% if (hack.picture) { %>
+          <img style="width: 100%; margin-top: 12.5%" src=<%= hack.picture %>></img>
+        <% } %>
+        <div id="cover">
+          <div id="hackbar">
+            <div id="hacktitle"><%= hack.title %></div>
+			<p><%= hack.blurb %></p>
+          </div>
+        </div>
+      </div>
+    <div class="grid" id="infoGrid" style="width: 75%; margin-left: auto; margin-right: auto;">
+>>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
       <% if (hack.video) { squarecount++;%>
         <div class="square threecol external link" name=<%= hack.video %>>
           <img src="https://s3.amazonaws.com/hackerfair/video_icon.png" style="width: 100%;" />
@@ -50,12 +64,18 @@
           <% } %>
           <div class="squaretext"></div>
         </div>
+<<<<<<< HEAD
       <% } %>
       <% for (var member in names) { squarecount++; %>
         <div class="square threecol link" name=<%= "users/"+member %>>
           <span><%= names[member] %></span>
           <div class="squaretext"></div>
         </div>
+=======
+        <% if (Math.random() > 0.6) { squarecount++; %>
+          <div class="blank square threecol"></div>
+        <% } %>
+>>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
       <% } %>
       <% if (hack.source) { squarecount++;%>
         <div class="square threecol external link" name=<%= hack.source %>>

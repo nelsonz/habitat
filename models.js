@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Model Schemas for Mongoose */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
@@ -15,6 +16,15 @@ exports.EventSchema = new Schema({
   name: String
 });
 
+=======
+var mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
+	
+function toLower(str) {
+	return str.toLowerCase();
+}
+	
+>>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 exports.HackSchema = new Schema({
 	title: {type: String, required: true},
 	owners: [Schema.ObjectId],
@@ -26,7 +36,11 @@ exports.HackSchema = new Schema({
 	blurb: {type: String, required: true},
 	tags: [String],
 	hackid: String,
+<<<<<<< HEAD
   event: String
+=======
+	booth: {type: Boolean, default: false},
+>>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 });
 
 exports.UserSchema = new Schema({
@@ -45,6 +59,12 @@ exports.UserSchema = new Schema({
 		site: String,
 		blurb: String,
 		attending: {type: Boolean, default: true},
+<<<<<<< HEAD
 	},
 });
 /* END MODEL SCHEMAS */
+=======
+		booth: {type: Boolean, default: false},
+	},
+});
+>>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
