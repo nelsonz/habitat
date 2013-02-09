@@ -235,35 +235,36 @@ app.get('/projects/filter/:page/:query', function(req, res) {
 });
 
 app.get('/projects/:id', function(req, res) {
-  Hack.findOne({
-    "hackid": req.params.id,
-  }, function(err, doc) {
-    var team = {};
-
-    for (var i=0; i<doc.team.length; i++) {
-      if(doc.team[i]) {
-        team[doc.team[i]] = {
-          name: doc.team[i],
-          avatarUrl: "https://s3.amazonaws.com/hackerfair/default-photo.jpg"
-        };
-      }
-    }
-
-    User.where('github.username').in(doc.team).exec(function(err, docs) {
-      for (var i=0; i<docs.length; i++) {
-        team[docs[i].github.username] = {
-          name: docs[i].info.name || docs[i].github.name || docs[i].github.username,
-          avatarUrl: docs[i].github.avatarUrl,
-        };
-      }
-      res.render('hack', {
-        title: doc.title,
-        user: req.user,
-        hack: doc,
-        team: team,
-      });
-    });
-  });
+	Hack.findOne({
+		"hackid": req.params.id,
+	}, function(err, doc) {
+		var team = {};
+		
+		for (var i=0; i<doc.team.length; i++) {
+			if(doc.team[i]) {
+				team[doc.team[i]] = {
+					name: doc.team[i],
+					avatarUrl: "https://s3.amazonaws.com/hackerfair/default-photo.jpg"
+				};
+			}
+		}
+		
+		User.where('github.username').in(doc.team).exec(function(err, docs) {
+			for (var i=0; i<docs.length; i++) {
+				team[docs[i].github.username] = {
+					name: docs[i].info.name || docs[i].github.name || docs[i].github.username,
+					avatarUrl: docs[i].github.avatarUrl,
+				};
+			}
+			res.render('hack', {
+				title: doc.title,
+				user: req.user,
+				hack: doc,
+				team: team,
+        names: doc.names
+			});
+		});
+	});
 });
 
 app.get('/projects/:id/edit', ensureAuthenticated('/login'), function(req, res) {
