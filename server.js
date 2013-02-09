@@ -363,7 +363,7 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
     var now = new Date();
     Event.findOne({start: {$lt: now}, end: {$gt: now}}, function(err, event){
 
-      var name = "Ongoing hack";
+      var name = "hackjam";
       if(!err && event){
         name = event.name;
       }
