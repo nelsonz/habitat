@@ -304,8 +304,6 @@ app.post('/projects/:id', ensureAuthenticated('/login'), function(req, res) {
       doc.picture = forceAbsolute(req.body.picture);
       doc.blurb = req.body.blurb;
       doc.tags = req.body.tags.toLowerCase().split(',').map(stripSpaces);
-      doc.booth = (req.body.booth == 'on');
-      console.log(doc.booth);
       doc.save(function(err, doc) {
         res.redirect('/projects/'+doc.hackid);
       });
@@ -339,7 +337,6 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
       tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
       hackid: address+"-"+Math.random().toString(36).substring(2, 8)+(collisions ? collisions : ""),
       team: req.body.team.split(',').map(stripSpaces),
-      booth: req.body.booth,
     });
 
     hack.save(function(err, doc) {
