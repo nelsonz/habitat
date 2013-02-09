@@ -102,7 +102,8 @@ app.configure(function() {
 
 // instantiate Mongoose models
 var User = mongoose.model('User', models.UserSchema),
-  Hack = mongoose.model('Hack', models.HackSchema);
+  Hack = mongoose.model('Hack', models.HackSchema),
+  Event = mongoose.model('Event', models.EventSchema);
 
 /* START AUTHENTICATION FUNCTIONS */
 passport.serializeUser(function(user, done) {
@@ -310,25 +311,35 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
         collisions += (stripPunct(doc.title.toLowerCase()) == address ? 1 : 0);
       }).length;
 
-    var hack = new Hack({
-      title: req.body.title,
-      owners: [req.user._id],
-      source: forceAbsolute(req.body.source),
-      demo: forceAbsolute(req.body.demo),
-      video: forceAbsolute(req.body.video),
-      picture: forceAbsolute(req.body.picture),
-      blurb: req.body.blurb,
-      tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
-      hackid: address+"-"+Math.random().toString(36).substring(2, 8)+(collisions ? collisions : ""),
-      team: req.body.team.split(',').map(stripSpaces),
-      booth: req.body.booth,
-    });
+    var now = new Date();
+    Event.findOne({start: {$lt: now}, end: {$gt: now}}, function(err, event){
 
-    hack.save(function(err, doc) {
-      if (err) {
-        console.log(err);
+      var name = "Ongoing hack";
+      if(!err && event){
+        name = event.name;
       }
-      res.redirect('/projects/'+hack.hackid);
+
+      var hack = new Hack({
+        title: req.body.title,
+        owners: [req.user._id],
+        source: forceAbsolute(req.body.source),
+        demo: forceAbsolute(req.body.demo),
+        video: forceAbsolute(req.body.video),
+        picture: forceAbsolute(req.body.picture),
+        blurb: req.body.blurb,
+        tags: req.body.tags.toLowerCase().split(',').map(stripSpaces),
+        hackid: address+"-"+Math.random().toString(36).substring(2, 8)+(collisions ? collisions : ""),
+        team: req.body.team.split(',').map(stripSpaces),
+        booth: req.body.booth,
+        event: name
+      });
+
+      hack.save(function(err, doc) {
+        if (err) {
+          console.log(err);
+        }
+        res.redirect('/projects/'+hack.hackid);
+      });
     });
   });
 });
