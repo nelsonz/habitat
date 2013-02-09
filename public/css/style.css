@@ -131,7 +131,14 @@ h1 {
 	visibility: visible;
 	opacity: 0.0;
 	position: relative;
+}
+
+.link {
 	cursor: pointer;
+}
+
+.darkgreen {
+	background-color: darkgreen;
 }
 
 .twocol {
@@ -311,13 +318,13 @@ p {
 
 .front {
 	background-color: green;
-	opacity: 0.6;
+	opacity: 0.7;
 }
 
 .front:hover {
-	opacity: 0.3;
-	-moz-transition: opacity .15s linear;
-	-webkit-transition: opacity .15s linear;
+	opacity: 0.5;
+	-moz-transition: opacity .25s linear;
+	-webkit-transition: opacity .25s linear;
 }
 
 .demo {
