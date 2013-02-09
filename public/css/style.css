@@ -137,7 +137,8 @@ h1 {
 
 .breaker {
         clear: left;
-=======
+}
+
 .darkgreen {
 	background-color: darkgreen;
 }
@@ -217,7 +218,7 @@ h1 {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
-	20height: 1%;
+	height: 1%;
 }
 
 .column {
