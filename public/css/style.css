@@ -345,3 +345,39 @@ input.submit {
 a {
 	color: white;
 }
+
+.row {
+  position: relative;
+  clear: both;
+  padding: 0.1px 0;
+}
+
+.row-light {
+  background-color: #8A8A8A;
+}
+
+.row-dark {
+  background-color: #262626;
+  color: white;
+}
+
+.hack-info {
+  min-height: 395px;
+  position: relative;
+}
+
+.hack-pic {
+  width: 100%;
+}
+
+.hack-desc {
+  color: white;
+  padding: 1px 10px;
+}
+
+.hack-desc-overlay {
+  bottom: 0px;
+  position:absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+}
