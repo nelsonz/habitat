@@ -1,9 +1,4 @@
 /* fonts */
-<<<<<<< HEAD
-=======
-@import url(http://fonts.googleapis.com/css?family=Lobster|Play|Monda|Arvo|Anaheim|Droid+Sans);
-
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 @font-face {
   font-family: 'Code-Pro-Demo';
   src: url('/css/webfonts/16CC75_0.eot');
@@ -30,7 +25,6 @@ body {
 	margin: 0px;
 	background-color: #fff;
 	display: none;
-<<<<<<< HEAD
   font-size: 18px;
   line-height: 25px;
 	font-family: Anaheim;
@@ -39,8 +33,6 @@ body {
 h1 {
   font-size: 41px;
   line-height: 56px;
-=======
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 }
 
 #header {
@@ -56,10 +48,6 @@ h1 {
 }
 
 .nav, .dumbnav {
-<<<<<<< HEAD
-=======
-	font-family: Anaheim;
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 	font-size: 16px;
 	color: #fff;
 	letter-spacing: 0px;
@@ -111,24 +99,11 @@ h1 {
 
 .form_line {
 	font-size: 18px;
-<<<<<<< HEAD
 }
 
 .title {
 	font-family: 'Code-Pro-Demo';
   margin: 0;
-=======
-	font-family: Anaheim;
-}
-
-.title {
-	width: 100%;
-	font-size: 32px;
-	line-height: 32px;
-	text-align: center;
-	font-family: 'Code-Pro-Demo';
-	padding-bottom: 10px;
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 }
 
 .form_input {
@@ -154,7 +129,6 @@ h1 {
 	visibility: visible;
 	opacity: 0.0;
 	position: relative;
-<<<<<<< HEAD
 }
 
 .link {
@@ -169,11 +143,6 @@ h1 {
 	background-color: darkgreen;
 }
 
-=======
-	cursor: pointer;
-}
-
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 .twocol {
 	width: 48.8%;
 	padding-bottom: 48.8%;
@@ -181,7 +150,6 @@ h1 {
 	margin-bottom: 1.2%;
 }
 
-<<<<<<< HEAD
 .sixcol {
 	width: 16.26%;
 	padding-bottom: 16.27%;
@@ -217,8 +185,6 @@ h1 {
 	margin-bottom: 0.3%;
 }
 
-=======
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 .threecol {
 	width: 32.5%;
 	padding-bottom: 32.5%;
@@ -263,7 +229,6 @@ h1 {
 	float: left;
 }
 
-<<<<<<< HEAD
 .column6 {
 	position: relative;
 	width: 75%;
@@ -279,8 +244,6 @@ h1 {
 	float: left;
 }
 
-=======
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 .squaretext {
 	position: absolute;
 	margin: 0px;
@@ -329,7 +292,6 @@ h1 {
 	top: 0%;
 }
 
-<<<<<<< HEAD
 .title-bar {
 	text-align: center;
   background-color: green;
@@ -344,29 +306,6 @@ h1 {
 
 .container {
 	margin: 0 auto;
-=======
-#hacktitle {
-	text-align: center;
-	font-size: 32px;
-	line-height: 48px;
-	width: 90%;
-	margin-left: 5%;
-	padding-top: 2	px;
-	padding-bottom: 4px;
-	position: relative;
-	font-family: 'Code-Pro-Demo';
-	overflow: auto;
-}
-
-.container {
-	width: 75%;
-	margin-top: 12.2%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-right: 1%;
-	height: 0px;
-	padding-bottom: 75%;
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 	overflow: hidden;
 	position: relative;
 }
@@ -389,24 +328,11 @@ h1 {
 }
 
 p {
-<<<<<<< HEAD
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
 
 .square>span {
-=======
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	position: relative;
-}
-
-.square>span {
-	font-family: Anaheim;
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 	font-size: 20px;
 	line-height: 22px;
 	font-weight: bold;
@@ -443,7 +369,6 @@ p {
 	vertical-align: middle;
 }
 
-<<<<<<< HEAD
 .squaretext>.squarebio{
 	font-family: Anaheim;
 	letter-spacing: 0px;
@@ -467,17 +392,6 @@ p {
 	opacity: 0.5;
 	-moz-transition: opacity .25s linear;
 	-webkit-transition: opacity .25s linear;
-=======
-.front {
-	background-color: green;
-	opacity: 0.6;
-}
-
-.front:hover {
-	opacity: 0.3;
-	-moz-transition: opacity .15s linear;
-	-webkit-transition: opacity .15s linear;
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 }
 
 .demo {
@@ -497,17 +411,12 @@ input.submit {
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
-<<<<<<< HEAD
-=======
-	font-family: Anaheim;
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 	color: white;
 	background-color: green;
 }
 
 a {
 	color: white;
-<<<<<<< HEAD
 }
 
 .row {
@@ -545,6 +454,3 @@ a {
   background-color: rgba(0, 0, 0, 0.7);
   width: 100%;
 }
-=======
-}
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2

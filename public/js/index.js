@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 /* transition a grid */
-=======
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 function easeGrid(id, direction, maxtime) {
 	$(".grid#"+id).children().each(function(i, e) {
 		$(e).animate({
@@ -10,10 +7,7 @@ function easeGrid(id, direction, maxtime) {
 	});
 };
 
-<<<<<<< HEAD
 /* transition between pages */
-=======
->>>>>>> 289a296623ce7d8f436bec7c4b2c4e8bdf09d9d2
 function transition(dest) {
 	var pagefade_delay = 0;
 	console.log(dest);
