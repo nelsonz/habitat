@@ -145,7 +145,7 @@ app.get('/auth/github/callback',
     failureRedirect: '/', //add failure page
   }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/submit');
   }
 );
 /* END AUTHENTICATION FUNCTIONS */
@@ -262,6 +262,13 @@ app.get('/projects/:id/edit', ensureAuthenticated('/login'), function(req, res) 
     }
   });
 });
+
+app.get('/projects/query/', function(req, res) {
+  console.log('In Query;');
+  console.log(req);
+  console.log(res);
+  res.redirect('/');
+})
 
 app.post('/projects/:id', ensureAuthenticated('/login'), function(req, res) {
   console.log(req.body);
