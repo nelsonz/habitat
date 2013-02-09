@@ -6,9 +6,11 @@ Infrastructure for Hackers@Berkeley.
 Quick start
 -----------
 
-> git clone https://github.com/HackBerkeley/habitat
-> npm install
-> node server.js
+-  git clone https://github.com/HackBerkeley/habitat
+
+-  npm install
+
+-  node server.js
 
 Dependencies
 ------------
