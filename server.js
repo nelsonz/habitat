@@ -172,32 +172,35 @@ app.get('/users', function(req, res) {
 });
 
 app.get('/users/:username', function(req, res) {
-        if (req.params.username == "me") {
-          req.params.username == req.user;
+  function prepare_response(err, doc) {
+    if (err) {
+      res.redirect('https://github.com/'+req.params.username);
+    } else {
+      Hack.find({
+        'team': {
+          $all: [req.params.username],
         }
-        /*
-	res.redirect('https://github.com/'+req.params.username);
-	*/
-	User.findOne({
-		"github.username": req.params.username,
-	}, function(err, doc) {
-		if (err) {
-			res.redirect('https://github.com/'+req.params.username);
-		} else {
-			Hack.find({
-				'team': {
-					$all: [req.params.username],
-				}
-			}, function(err, docs) {
-				res.render('profile', {
-					title: 'Profile',
-					user: req.user,
-					viewing: doc,
-					hacks: docs,
-				});
-			});
-		}
-	});
+      }, function(err, docs) {
+        res.render('profile', {
+          title: 'Profile',
+          user: req.user,
+          viewing: doc,
+          hacks: docs,
+        });
+      });
+    }
+  }
+  if (req.params.username == "me") {
+    if (req.user) {
+      prepare_response(false, req.user);
+    } else {
+      passport.authenticate("github");
+    }
+  } else {
+    User.findOne({
+      "github.username": req.params.username,
+    }, prepare_response);
+  }
 });
 
 // need to be able to edit profile page
