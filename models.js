@@ -26,7 +26,6 @@ exports.HackSchema = new Schema({
 	blurb: {type: String, required: true},
 	tags: [String],
 	hackid: String,
-	booth: {type: Boolean, default: false},
   event: String
 });
 
@@ -46,7 +45,6 @@ exports.UserSchema = new Schema({
 		site: String,
 		blurb: String,
 		attending: {type: Boolean, default: true},
-		booth: {type: Boolean, default: false},
 	},
 });
 /* END MODEL SCHEMAS */
