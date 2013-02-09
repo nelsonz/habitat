@@ -199,14 +199,39 @@ app.post('/users/:username', function(req, res) {
 
 });
 
-app.get('/projects', function(req, res) {
-  Hack.find({}, function(err, docs) {
+function project_filter(req, res, page, searchstr) {
+  /* Return 32 objects that correspond to the given page and query. */
+  var query = Hack.find({});
+  if (searchstr.length > 0) {
+    var constraints = [];
+    var terms = searchstr.split(' ');
+    terms.forEach(function(term) {
+      var termrx = new RegExp(term, "i");
+      constraints.push({'title': { $regex: termrx}});
+      constraints.push({'blurb': { $regex: termrx}});
+    });
+    constraints.push({'tags': { $in: terms }});
+    query.or(constraints);
+  }
+
+  query.skip(page * 32);
+  query.limit(32);
+
+  query.exec(function(err, docs) {
     res.render('hacks', {
       title: 'Hacks',
       user: req.user,
       hacks: docs,
     });
   });
+};
+
+app.get('/projects', function(req, res) {
+  project_filter(req, res, 0, "");
+});
+
+app.get('/projects/filter/:page/:query', function(req, res) {
+  project_filter(req, res, req.params.page, req.params.query);
 });
 
 app.get('/projects/:id', function(req, res) {
@@ -262,13 +287,6 @@ app.get('/projects/:id/edit', ensureAuthenticated('/login'), function(req, res) 
     }
   });
 });
-
-app.get('/projects/query/', function(req, res) {
-  console.log('In Query;');
-  console.log(req);
-  console.log(res);
-  res.redirect('/');
-})
 
 app.post('/projects/:id', ensureAuthenticated('/login'), function(req, res) {
   console.log(req.body);
