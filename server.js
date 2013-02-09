@@ -169,7 +169,6 @@ app.get('/users', function(req, res) {
 
 // need actual profile pages
 app.get('/users/:username', function(req, res) {
-<<<<<<< HEAD
         /*
 	res.redirect('https://github.com/'+req.params.username);
 	*/
@@ -195,29 +194,6 @@ app.get('/users/:username', function(req, res) {
 		}
 	});
   res.redirect('https://github.com/'+req.params.username);
-  /*
-  User.findOne({
-    "github.username": req.params.username,
-  }, function(err, doc) {
-    if (doc) {
-      Hack.find({
-        'team': {
-          $all: [req.params.username],
-        }
-      }, function(err, docs) {
-        res.render('profile', {
-          title: 'Profile',
-          user: req.user,
-          viewing: doc,
-          hacks: docs,
-        });
-      });
-    }
-    else {
-      res.redirect('https://github.com/'+req.params.username);
-    }
-  });
-  */
 });
 
 // need to be able to edit profile page
