@@ -150,7 +150,7 @@ app.get('/auth/github/callback',
     failureRedirect: '/', //add failure page
   }),
   function(req, res) {
-    res.redirect('/submit');
+    res.redirect('/users/me');
   }
 );
 /* END AUTHENTICATION FUNCTIONS */
@@ -171,8 +171,10 @@ app.get('/users', function(req, res) {
   });
 });
 
-// need actual profile pages
 app.get('/users/:username', function(req, res) {
+        if (req.params.username == "me") {
+          req.params.username == req.user;
+        }
         /*
 	res.redirect('https://github.com/'+req.params.username);
 	*/
