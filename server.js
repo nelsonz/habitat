@@ -175,7 +175,9 @@ app.get('/users/:username', function(req, res) {
 	User.findOne({
 		"github.username": req.params.username,
 	}, function(err, doc) {
-		if (doc) {
+		if (err) {
+			res.redirect('https://github.com/'+req.params.username);
+		} else {
 			Hack.find({
 				'team': {
 					$all: [req.params.username],
@@ -189,11 +191,7 @@ app.get('/users/:username', function(req, res) {
 				});
 			});
 		}
-		else {
-			res.redirect('https://github.com/'+req.params.username);
-		}
 	});
-  res.redirect('https://github.com/'+req.params.username);
 });
 
 // need to be able to edit profile page
