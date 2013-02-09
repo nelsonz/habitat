@@ -9,6 +9,12 @@ function toLower(str) {
 /*END UTILITY FUNCTIONS */
 
 /* START MODEL SCHEMAS */
+exports.EventSchema = new Schema({
+  start: Date,
+  end: Date,
+  name: String
+});
+
 exports.HackSchema = new Schema({
 	title: {type: String, required: true},
 	owners: [Schema.ObjectId],
@@ -20,7 +26,7 @@ exports.HackSchema = new Schema({
 	blurb: {type: String, required: true},
 	tags: [String],
 	hackid: String,
-	booth: {type: Boolean, default: false},
+  event: String
 });
 
 exports.UserSchema = new Schema({
@@ -39,7 +45,6 @@ exports.UserSchema = new Schema({
 		site: String,
 		blurb: String,
 		attending: {type: Boolean, default: true},
-		booth: {type: Boolean, default: false},
 	},
 });
 /* END MODEL SCHEMAS */
