@@ -28,12 +28,16 @@ var port = process.argv[3] || 8000,
   MONGO_URI = remote_db,
   SITE_URL = local_url;
 
+console.log(process.argv);
+
 if (process.argv[2] == "production") {
   SITE_URL = heroku_url;
 }
 else if (process.argv[2] == "local") {
   MONGO_URI = local_db;
 }
+
+console.log(SITE_URL);
 
 // instantiate the app and connect to the database
 var app = module.exports = express.createServer(),
