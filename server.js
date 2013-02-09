@@ -19,7 +19,7 @@ mode defaults (if no argument or garbage is provided) to using the test database
 port defaults to 8000
 */
 var port = process.argv[3] || 8000,
-  heroku_url = "http://hf.hackersatberkeley.com",
+  heroku_url = "http://habitat.hackersatberkeley.com",
   local_url = "http://localhost:"+port,
   local_db = 'mongodb://localhost:27017/habitat',
   remote_db = process.env.TMPMONGOHQ_URL || "mongodb://hab_test_db:hackallnightyoloswag2013@ds033187.mongolab.com:33187/heroku_app11021922",
