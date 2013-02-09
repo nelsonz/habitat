@@ -7,14 +7,18 @@
   <% var squarecount = 0; %>
     <div class="mid_container">
       <div class="container">
-        <% if (hack.picture) { %>
-          <img style="width: 100%; margin-top: 12.5%" src=<%= hack.picture %>></img>
-        <% } %>
-        <div id="cover">
-          <div id="hackbar">
-            <div id="hacktitle"><%= hack.title %></div>
-			<p><%= hack.blurb %></p>
-          </div>
+        <div class="title-bar"> <h1 class="title"><%= hack.title %></h1> </div>
+        <div class="hack-info row row-dark">
+          <% if (hack.picture) { %>
+            <img class="hack-pic" src=<%= hack.picture %>></img>
+            <div class="hack-desc hack-desc-overlay">
+              <p class=""><%= hack.blurb %></p>
+            </div>
+          <% } else { %>
+              <div class="hack-desc">
+                <p class=""><%= hack.blurb %></p>
+              </div>
+          <% } %>
         </div>
       </div>
       <div class="grid row-dark" id="infoGrid">
