@@ -1,7 +1,7 @@
 <div id="content">
   <!-- Blank column -->
   <div class="grid column1" id="links">
-    <% for (var i=0; i<6; i++) { %>
+    <% for (var i=0; i<2; i++) { %>
       <div class="blank square onecol"></div>
     <% } %>
   </div>
@@ -11,16 +11,13 @@
     <div class="square twocolumntwosquare">
       <img src=<%= viewing.github.avatarUrl+"?s=400" %> style="width: 100%;"></img>
     </div>
-    <% for (var i=0; i<8; i++) { %>
-      <div class="blank square twocol"></div>
-    <% } %>
   </div>
 
   <!--Name and info-->
   <div class="grid column" id="links">
 
     <div class="square twocolumn2by1rect">
-      <div class="squaretext"><div class="squaretitle">
+      <div class="squaretext" style="font-size: 30px;"><div class="squaretitle">
       	<% if (viewing.info.name) { %> 
           <%= viewing.info.name %>
         <% } %>
@@ -29,45 +26,92 @@
 
     <div class="square twocol">
       <div class="squaretext"><div class="squaretitle">
-      	<% if (viewing.info.name) { %>
-          <%= viewing.info.name %>
- 	  <br> @<%= viewing.github.username %> 
-	<% } else { %> 
-          @<%= viewing.github.username %>
+        <% if (viewing.github.email) { %>
+          <%= viewing.github.email%>
+        <% } else { %>
+         <% var a = Math.floor(Math.random() * 150 + 150); %>
+         <% var b = Math.floor(Math.random() * 100 + 150);%>
+         <img src=<%="http://placekitten.com/g/"+a+"/"+b%> style="width: 100%"></img>
         <% } %>
       </div></div>
     </div>
 
-    <div class="square twocol">
-      <div class="squaretext"><div class="squaretitle">
-      	<% if (viewing.info.name) { %>
-          <%= viewing.info.name %>
- 	  <br> @<%= viewing.github.username %> 
-	<% } else { %> 
+    <div class="square twocol"> 
+    <a href=<%="https://www.github.com/"+viewing.github.username %>>
+        <img src="/img/github_icon.png" style="width:100%;"></img> 
+        <div class="squaretext"><div class="squaretitle">
           @<%= viewing.github.username %>
-        <% } %>
-      </div></div>
+          <br>
+          <br>
+          <br>
+        </div></div>
     </div>
-
-    <% for (var i=0; i<8; i++) { %>
-      <div class="blank square twocol"></div>
-    <% } %>
-
+    </a>
   </div>
-  
-  <!-- Bio -->
+   
+  <!-- Bio 
   <div class="grid column" id="links">
     <div class="square twocolumntwosquare">
-      <p>Now, now. Perfectly symmetrical violence never solved anything. OK, this has gotta stop. I'm going to remind Fry of his humanity the way only a woman can. No, of course not.</p>
+      <div class="squaretext"><div class="squarebio">
+        insert bio here, or placeholder text from instantgratification?
+      </div></div>
     </div>
-    <% for (var i=0; i<8; i++) { %>
-      <div class="blank square twocol"></div>
+  </div>i -->
+  <!-- Bio placeholder -->
+  <div class="grid column1" id="links">
+    <% for (var i=0; i<2; i++) { %>
+      <div class="blank square onecol">
+      </div>
+    <% } %>
+  </div>
+  <!-- Bio placeholder-->
+  <div class="grid column1" id="links">
+    <% for (var i=0; i<2; i++) { %>
+      <div class="blank square onecol">
+      </div>
     <% } %>
   </div>
 
-  <!-- Empty -->
+
+
+  <!-- Empty last col 1st 2 rows -->
   <div class="grid column1" id="links">
-    <% for (var i=0; i<6; i++) { %>
+    <% for (var i=0; i<2; i++) { %>
+      <div class="blank square onecol">
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Empty 1st col 2nd 2 rows -->
+  <div class="grid column1" id="links">
+    <% for (var i=0; i<2; i++) { %>
+      <div class="blank square onecol">
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Hacks -->
+  <div class="grid column6" id="links">
+    <% for (var i=0; i<hacks.length; i++) { %>
+      <div class="square link sixcol" name=<%= "projects/" + hacks[i].hackid %>>
+        <span><%= hacks[i].title %></span>
+        <% if (hacks[i].picture) { %>
+          <img src=<%= hacks[i].picture %> style="width: 100%;">
+        <% } else { %>
+          <img src="https://s3.amazonaws.com/hackerfair/hack-logo-black-png.png" style="width: 100%;">
+        <% } %>
+        <div class="squaretext"></div>
+      </div>   
+    <% } %>
+
+    <% for (var i=hacks.length; i<12; i++) { %>
+      <div class="square blank sixcol"></div>
+    <% } %>
+  </div>
+
+  <!-- Empty last col 2nd 2 rows-->
+  <div class="grid column1" id="links">
+    <% for (var i=0; i<2; i++) { %>
       <div class="blank square onecol"></div>
     <% } %>
   </div>
