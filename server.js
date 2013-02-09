@@ -236,6 +236,7 @@ app.get('/projects/:id', function(req, res) {
 				user: req.user,
 				hack: doc,
 				team: team,
+        names: doc.names
 			});
 		});
 	});

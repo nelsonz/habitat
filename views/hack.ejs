@@ -50,9 +50,12 @@
           <% } %>
           <div class="squaretext"></div>
         </div>
-        <% if (Math.random() > 0.6) { squarecount++; %>
-          <div class="blank square threecol"></div>
-        <% } %>
+      <% } %>
+      <% for (var member in names) { squarecount++; %>
+        <div class="square threecol link" name=<%= "users/"+member %>>
+          <span><%= names[member] %></span>
+          <div class="squaretext"></div>
+        </div>
       <% } %>
       <% if (hack.source) { squarecount++;%>
         <div class="square threecol external link" name=<%= hack.source %>>
