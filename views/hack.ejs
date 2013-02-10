@@ -69,6 +69,29 @@
         <div class="blank square threecol"></div>
       <% } %>
     </div>
+    <form action="/projects/<%=hack.hackid%>/comment" method="post">
+      <label>Name:</label><br>
+      <input type="text" name="postername" size="36"></input><br>
+      <label>Comment:</label><br>
+      <textarea type="text" name="postercomment" cols="50" rows="8"></textarea><br>
+      <input type="submit" value="Submit">
+    </form>
+    <% console.log("INSIDE TEMPLATE:" + JSON.stringify(hack.comments)); %>
+    <br>
+    <h1> COMMENTS </h1>
+    <% var keys = new Array(); %>
+    <% for (var k in hack.comments) { %>
+      <% keys.unshift(k); %>
+    <% } %>
+    <% console.log("KEYS: " + JSON.stringify(keys)); %>
+    <% for (var c = keys.length, n=0; n<c; n++) { %>
+      <% if (hack.comments[keys[n]] .poster != undefined) { %>
+        <div class="commentDiv">
+          <div class="postername"><%= "POSTER: " + hack.comments[keys[n]].poster %></div>
+          <div class="postercomment"><%= "COMMENT: " + hack.comments[keys[n]].comment %></div><hr>
+        </div>
+      <% } %>
+    <% } %> 
 	<% if (user && hack.owners.indexOf(user._id) >=0) { %>
 		<input type="submit" class="submit cardcol" value="edit" onClick="window.location.href += '/edit'"></a>
 	<% } %>

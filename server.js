@@ -304,6 +304,7 @@ app.get('/projects/:id', function(req, res) {
 					avatarUrl: docs[i].github.avatarUrl,
 				};
 			}
+      console.log("LINE"+JSON.stringify(doc));
 			res.render('hack', {
 				title: doc.title,
 				user: req.user,
@@ -345,6 +346,8 @@ app.post('/projects/:id', ensureAuthenticated('/login'), function(req, res) {
     if (doc.owners.indexOf(req.user._id) < 0) {
       res.redirect('/projects/'+req.params.id);
     } else {
+      console.log("Goodbye"+JSON.stringify(req.body));
+
       doc.title = req.body.title;
       doc.source = forceAbsolute(req.body.source);
       doc.demo = forceAbsolute(req.body.demo);
@@ -352,6 +355,7 @@ app.post('/projects/:id', ensureAuthenticated('/login'), function(req, res) {
       doc.picture = forceAbsolute(req.body.picture);
       doc.blurb = req.body.blurb;
       doc.tags = req.body.tags.toLowerCase().split(',').map(stripSpaces);
+      doc.comments = req.body.comments;
       doc.save(function(err, doc) {
         res.redirect('/projects/'+doc.hackid);
       });
@@ -407,6 +411,7 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
         name = event.name;
       }
 
+
       var hack = new Hack({
         title: req.body.title,
         owners: [req.user._id],
@@ -419,7 +424,8 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
         hackid: address+"-"+Math.random().toString(36).substring(2, 8)+(collisions ? collisions : ""),
         team: req.body.team.split(',').map(stripSpaces),
         booth: req.body.booth,
-        event: name
+        event: name,
+        comments: [req.body.comments]
       });
 
       hack.save(function(err, doc) {
@@ -436,6 +442,23 @@ app.get('/', function(req, res) {
   res.render('index', {
     title: 'Home',
     user: req.user,
+  });
+});
+
+app.post('/projects/:id/comment', function(req,res) {
+  console.log("HELLO");
+
+  var newComment = {poster: req.body.postername, comment: req.body.postercomment};
+
+  console.log("WTF"+JSON.stringify(newComment));
+  Hack.update({
+    "hackid": req.params.id,
+  }, { $push: { comments: newComment } }, 
+  function(err, doc, raw) {
+    console.log("NOOO"+JSON.stringify(doc));
+    console.log("RAW: " + raw);
+    console.log("ERR: " + err);
+    res.redirect('/projects/'+req.params.id);
   });
 });
 /* END REQUEST HANDLERS */
