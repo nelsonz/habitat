@@ -248,7 +248,7 @@ app.post('/users/:username', function(req, res) {
 });
 
 function project_filter(req, res, page, searchstr) {
-  /* Return 32 objects that correspond to the given page and query. */
+  /* Return many objects that correspond to the given page and query. */
   var query = Hack.find({});
   if (searchstr.length > 0) {
     var constraints = [];
@@ -262,8 +262,8 @@ function project_filter(req, res, page, searchstr) {
     query.or(constraints);
   }
 
-  query.skip(page * 30);
-  query.limit(30);
+  //query.skip(page * 30);
+  //query.limit(30);
 
   query.exec(function(err, docs) {
     res.render('hacks', {
