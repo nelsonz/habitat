@@ -233,9 +233,9 @@ app.post('/users/:username', function(req, res) {
         console.log(err);
         res.redirect("/users/me");
       } else {
-        user.info.name = req.body.user.name || user.name;
-        user.info.email = req.body.user.email || user.email;
-        user.info.blurb = req.body.user.blurb || user.blurb;
+        user.info.name = req.body.user.name || user.info.name;
+        user.info.email = req.body.user.email || user.info.email;
+        user.info.blurb = req.body.user.blurb || user.info.blurb;
         user.save(function(e) {
           if (e) {
             console.log("Ran into error: "+e);
