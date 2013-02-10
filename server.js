@@ -173,7 +173,10 @@ app.get('/users', function(req, res) {
 });
 
 app.get('/users/:username', function(req, res) {
-  function prepare_response(err, doc) {
+  function prepare_response(err, doc, myself) {
+    if (!myself || myself!=true) {
+      myself = false;
+    }
     if (err) {
       res.redirect('https://github.com/'+req.params.username);
     } else {
@@ -187,38 +190,59 @@ app.get('/users/:username', function(req, res) {
           user: req.user,
           viewing: doc,
           hacks: docs,
-          quote: '\"There are few sources of energy so powerful as a procrastinating college student.\" -- paul graham'
+          quote: '\"There are few sources of energy so powerful as a procrastinating college student.\" -- paul graham',
+          myself: myself
         });
       });
     }
   }
   if (req.params.username == "me") {
     if (req.user) {
-      prepare_response(false, req.user);
+      prepare_response(false, req.user, true);
     } else {
       passport.authenticate("github");
     }
   } else {
-    User.findOne({
-      "github.username": req.params.username,
-    }, prepare_response);
+    if (req.user && req.params.username == req.user.github.username) {
+      prepare_response(false, req.user, true);
+    } else {
+      User.findOne({
+        "github.username": req.params.username,
+      }, prepare_response);
+    }
   }
 });
 
 // need to be able to edit profile page
 app.post('/users/:username', function(req, res) {
+  console.log("updating");
+  if (req.params.username == "me") {
+    var username = req.user.github.username;
+  } else {
+    var username = req.params.username;
+    if (req.user.github.username != username) {
+      res.redirect("/users/"+req.params.username);
+    }
+  }
+  console.log(username);
     User.findOne({
-      "github.username": req.params.username,
+      "github.username": username
     }, function(err, user) {
+      console.log("found the user: "+user);
       if (err) {
         console.log(err);
         res.redirect("/users/me");
-      } else if (user != req.user) {
-        res.redirect("/users/"+req.params.username);
       } else {
-        user.info.name = req.params.user.name || user.name;
-        user.info.email = req.params.user.email || user.email;
-        user.info.blurb = req.params.user.blurb || user.blurb;
+        user.info.name = req.body.user.name || user.name;
+        user.info.email = req.body.user.email || user.email;
+        user.info.blurb = req.body.user.blurb || user.blurb;
+        user.save(function(e) {
+          if (e) {
+            console.log("Ran into error: "+e);
+          } else {
+            console.log("Saved.");
+          }
+        });
       }
     });
 });

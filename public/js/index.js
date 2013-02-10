@@ -42,4 +42,16 @@ $(function() {
 			$(this).attr('value', $(this).attr('data-default'));
 		}
 	});
+        $("#nameField").keypress(function () {
+          $("#nameSaveButton").show();
+        });
+        $("#nameSaveButton").bind("click", function () {
+          $.post("/users/me", {user: {name: $("#nameField").text()}});
+        });
+        $("#blurb").keypress(function () {
+          $("#saveButton").show();
+        });
+        $("#saveButton").bind("click", function () {
+          $.post("/users/me", {user: {blurb: $("#blurb").text()}});
+        });
 });
