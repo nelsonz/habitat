@@ -223,8 +223,8 @@ function project_filter(req, res, page, searchstr) {
     query.or(constraints);
   }
 
-  query.skip(page * 32);
-  query.limit(32);
+  query.skip(page * 30);
+  query.limit(30);
 
   query.exec(function(err, docs) {
     res.render('hacks', {

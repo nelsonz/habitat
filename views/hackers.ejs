@@ -1,8 +1,15 @@
 <div id="content">
-  <div class="grid" id="userGrid">
-    <% var squarecount = 1; %>
+  <!-- Blank column -->
+  <div class="grid column1" id="links">
+    <% for (var i=0; i<(Math.floor(users.length / 6) + (users.length % 6 == 0 ? 0 : 1)); i++) { %>
+      <div class="blank square onecol"></div>
+    <% } %>
+  </div>
+  <!-- Hacks -->
+  <div class="grid column6" id="userGrid">
+    <% var squarecount = 0; %>
     <% for (var i=0; i<users.length; i++) { squarecount++; %>
-      <div class="square link" name=<%= "users/"+users[i].github.username %>>
+      <div class="square link sixcol" name=<%= "users/"+users[i].github.username %>>
         <span><%= (users[i].info.name || users[i].github.username)%></span>
         <% if (users[i].github.avatarUrl) { %>
           <img src=<%= users[i].github.avatarUrl+"?s=200" %> style="width: 100%;"></img>
@@ -11,9 +18,15 @@
         </div>
       </div>
     <% } %>
-    <% var remainder = ((squarecount < 40) ? 40 : 8*(Math.floor(squarecount / 8) + (squarecount % 8 == 0 ? 0 : 1))) - squarecount; %>
+    <% var remainder = ((squarecount < 30) ? 30 : 6*(Math.floor(squarecount / 6) + (squarecount % 6 == 0 ? 0 : 1))) - squarecount %>
     <% for (var i=0; i<remainder; i++) { %>
-      <div class="blank square"></div>
+      <div class="blank square sixcol"></div>
+    <% } %>
+  </div>
+  <!-- Empty last col 2nd 2 rows-->
+  <div class="grid column1" id="links">
+    <% for (var i=0; i<(Math.floor(squarecount / 6) + (squarecount % 6 == 0 ? 0 : 1)); i++) { %>
+      <div class="blank square onecol"></div>
     <% } %>
   </div>
 </div>
