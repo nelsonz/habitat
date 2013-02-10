@@ -20,20 +20,22 @@
       <div class="squaretext" style="font-size: 30px;"><div class="squaretitle">
       	<% if (viewing.info.name) { %> 
           <%= viewing.info.name %>
+        <% } else { %>
+          [Mr. No Name]
         <% } %>
       </div></div>
     </div>
 
     <div class="square twocol">
-      <div class="squaretext"><div class="squaretitle">
         <% if (viewing.github.email) { %>
-          <%= viewing.github.email%>
+          <div class="squaretext">
+            <%= viewing.github.email%>
+          </div>
         <% } else { %>
          <% var a = Math.floor(Math.random() * 150 + 150); %>
          <% var b = Math.floor(Math.random() * 100 + 150);%>
-         <img src=<%="http://placekitten.com/g/"+a+"/"+b%> style="width: 100%"></img>
+         <img src="<%='http://placekitten.com/g/'+a+'/'+b%>" style="width: 100%"></img>
         <% } %>
-      </div></div>
     </div>
 
     <div class="square twocol"> 
@@ -44,32 +46,18 @@
           <br>
           <br>
           <br>
+          <br>
         </div></div>
     </div>
     </a>
   </div>
    
-  <!-- Bio 
   <div class="grid column" id="links">
     <div class="square twocolumntwosquare">
       <div class="squaretext"><div class="squarebio">
-        insert bio here, or placeholder text from instantgratification?
+        <%= viewing.info.blurb || quote %>
       </div></div>
     </div>
-  </div>i -->
-  <!-- Bio placeholder -->
-  <div class="grid column1" id="links">
-    <% for (var i=0; i<2; i++) { %>
-      <div class="blank square onecol">
-      </div>
-    <% } %>
-  </div>
-  <!-- Bio placeholder-->
-  <div class="grid column1" id="links">
-    <% for (var i=0; i<2; i++) { %>
-      <div class="blank square onecol">
-      </div>
-    <% } %>
   </div>
 
 

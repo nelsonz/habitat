@@ -2,6 +2,7 @@
 var express = require('express'),
   connect = require('connect'),
   ejs = require('ejs'),
+  http = require('http'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   GooglePass = require('passport-google').Strategy,
@@ -186,6 +187,7 @@ app.get('/users/:username', function(req, res) {
           user: req.user,
           viewing: doc,
           hacks: docs,
+          quote: '\"There are few sources of energy so powerful as a procrastinating college student.\" -- paul graham'
         });
       });
     }
@@ -205,7 +207,20 @@ app.get('/users/:username', function(req, res) {
 
 // need to be able to edit profile page
 app.post('/users/:username', function(req, res) {
-
+    User.findOne({
+      "github.username": req.params.username,
+    }, function(err, user) {
+      if (err) {
+        console.log(err);
+        res.redirect("/users/me");
+      } else if (user != req.user) {
+        res.redirect("/users/"+req.params.username);
+      } else {
+        user.info.name = req.params.user.name || user.name;
+        user.info.email = req.params.user.email || user.email;
+        user.info.blurb = req.params.user.blurb || user.blurb;
+      }
+    });
 });
 
 function project_filter(req, res, page, searchstr) {
