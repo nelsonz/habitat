@@ -269,7 +269,7 @@ function project_filter(req, res, page, searchstr) {
     res.render('hacks', {
       title: 'Hacks',
       user: req.user,
-      hacks: docs,
+      hacks: shuffle(docs),
     });
   });
 };
