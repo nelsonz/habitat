@@ -26,6 +26,7 @@ exports.HackSchema = new Schema({
 	blurb: {type: String, required: true},
 	tags: [String],
 	hackid: String,
+	comments: [Schema.Types.Mixed],
   event: String
 });
 
@@ -47,4 +48,6 @@ exports.UserSchema = new Schema({
 		attending: {type: Boolean, default: true},
 	},
 });
+
+
 /* END MODEL SCHEMAS */
