@@ -69,16 +69,17 @@
         <div class="blank square threecol"></div>
       <% } %>
     </div>
-    <form action="/projects/<%=hack.hackid%>/comment" method="post">
-      <label>Name:</label><br>
-      <input type="text" name="postername" size="36"></input><br>
-      <label>Comment:</label><br>
-      <textarea type="text" name="postercomment" cols="50" rows="8"></textarea><br>
-      <input type="submit" value="Submit">
-    </form>
+    <div class="mid_container">
+	    <form action="/projects/<%=hack.hackid%>/comment" method="post">
+	      <label>Name:</label><br>
+         	<input class="form_input" type="text" name="postername" value="" placeholder="Your Name" required="">
+                 <textarea class="form_input" placeholder="description" name="postercomment"rows="7" col="0" style="line-height: 18px;" required=""></textarea>
+	      <input type="submit" value="Submit">
+	    </form>
+	</div>
     <% console.log("INSIDE TEMPLATE:" + JSON.stringify(hack.comments)); %>
     <br>
-    <h1> COMMENTS </h1>
+    <h1 class="title">Comments</h1>
     <% var keys = new Array(); %>
     <% for (var k in hack.comments) { %>
       <% keys.unshift(k); %>
