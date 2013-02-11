@@ -8,17 +8,16 @@
         <p class="form_line title">Editing <%= hack.title %></p>
         <form name="input" action=<%= "/projects/"+hack.hackid %> method="post">
             <div class="wide_container">
-                <input class="form_input" type="text" name="title" value=<%= hack.title %> placeholder="hack title" required>
-                <input class="form_input" type="text" name="team" value=<%= hack.team %> placeholder = "team members (github or real name)" required>
-				<input class="form_input" type="text" name="owners" value=<%= owners %> placeholder = "edit permissions (github name)" required>
-                <input class="form_input" type="text" name="source" placeholder="source URL" value=<%= hack.source %>>
-                <input class="form_input" type="text" name="demo" placeholder="demo URL" value=<%= hack.demo %>>
-                <input class="form_input" type="text" name="picture" size="chars" placeholder="image URL" value=<%= hack.picture %>>
-                <input class="form_input" type="text" name="video" placeholder="video URL" value=<%= hack.video %>>
-                <input class="form_input" type="text" name="tags" placeholder="tags (comma separated)" value=<%= hack.tags %>>
+                <input class="form_input" type="text" name="title" value="<%= hack.title %>" placeholder="hack title" required>
+                <input class="form_input" type="text" name="team" value="<%= hack.team %>" placeholder = "team members (github or real name)" required>
+				<input class="form_input" type="text" name="owners" value="<%= owners %>" placeholder = "edit permissions (github name)" required>
+                <input class="form_input" type="text" name="source" placeholder="source URL" value="<%= hack.source %>">
+                <input class="form_input" type="text" name="demo" placeholder="demo URL" value="<%= hack.demo %>">
+                <input class="form_input" type="text" name="picture" size="chars" placeholder="image URL" value="<%= hack.picture %>">
+                <input class="form_input" type="text" name="video" placeholder="video URL" value="<%= hack.video %>">
+                <input class="form_input" type="text" name="tags" placeholder="tags (comma separated)" value="<%= hack.tags %>">
                 <textarea class="form_input" placeholder="description" name="blurb" rows=7 col=100 style="line-height: 18px;" required><%= hack.blurb %></textarea>
-                <div class="form_line"><input type="checkbox" name="booth" checked=<%= hack.booth ? "yes" : "no" %>></input>Reserve a booth to demo</div>
-				<input type="submit" class="submit" value="Submit">
+                <input type="submit" class="submit" value="Submit">
             </div>
         </form>
     </div>
