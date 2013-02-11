@@ -406,7 +406,7 @@ app.post('/submit', ensureAuthenticated('/login'), function(req, res) {
     var now = new Date();
     Event.findOne({start: {$lt: now}, end: {$gt: now}}, function(err, event){
 
-      var name = "hackjam-sp12";
+      var name = "on-going-hacks";
       if(!err && event){
         name = event.name;
       }
