@@ -23,13 +23,13 @@ var port = process.argv[3] || 8000,
   heroku_url = "http://habitat.hackersatberkeley.com",
   local_url = "http://localhost:"+port,
   local_db = 'mongodb://localhost:27017/habitat',
-  remote_db = process.env.TMPMONGOHQ_URL || "mongodb://hab_test_db:hackallnightyoloswag2013@ds033187.mongolab.com:33187/heroku_app11021922",
+  remote_db = process.env.TMPMONGOHQ_URL || "mongodb://hackallnight:yoloswag2013@ds029847.mongolab.com:29847/hab_testing",
   GIT_ID = process.env.gitID || "1771ed921581c00d677e",
   GIT_SECRET = process.env.gitSecret || "f107369fd2c33bbbed9bd25132edbe9df717bdea",
   MONGO_URI = remote_db,
   SITE_URL = local_url;
 
-console.log(process.argv);
+//console.log(process.argv);
 
 if (process.argv[2] == "production") {
   SITE_URL = heroku_url;
@@ -38,7 +38,7 @@ else if (process.argv[2] == "local") {
   MONGO_URI = local_db;
 }
 
-console.log(SITE_URL);
+console.log("h@bitat running at", SITE_URL, "\nconnected to db", MONGO_URI);
 
 // instantiate the app and connect to the database
 var app = module.exports = express.createServer(),
@@ -107,7 +107,7 @@ app.configure(function() {
 
 // instantiate Mongoose models
 var User = mongoose.model('User', models.UserSchema),
-  Hack = mongoose.model('Hack', models.HackSchema),
+	Hack = mongoose.model('Hack', models.HackSchema),
   Event = mongoose.model('Event', models.EventSchema);
 
 /* START AUTHENTICATION FUNCTIONS */
@@ -178,11 +178,11 @@ app.get('/users/:username', function(req, res) {
       myself = false;
     }
     if (err) {
-      res.redirect('https://github.com/'+req.params.username);
+      res.redirect('https://github.com/'+doc.github.username);
     } else {
       Hack.find({
         'team': {
-          $all: [req.params.username],
+          $all: [doc.github.username],
         }
       }, function(err, docs) {
         res.render('profile', {
